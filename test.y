@@ -10,15 +10,22 @@
 	int yydebug=1;
 %}
 
-%token HI BYE OTHER
+%token INT FLOAT STRING CHAR BOOL
+%token SEMICOLON ENDLINE
+%token CONST
+%token IDENTIFIER NUMBER
+
 
 %start program
 
 %%
 
-program: hi program | bye program | OTHER;
-hi: HI {printf("Parsed Hi\n");};
-bye: BYE;
+program: statements;
+statements: statements statement ENDLINE | statement ENDLINE;
+statement: var_declaration;
+var_declaration: type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
+type: INT | FLOAT | CHAR | STRING | BOOL;
+
 %%
 
 int main (void){

@@ -10,9 +10,23 @@ void yyerror(char *s);
 %}
 
 %%
-"Hi"        return HI;
-"Bye"       return BYE;
-.           return OTHER;
+
+    /*Types*/
+"int"                           return INT;  
+"float"                         return FLOAT;
+"string"                        return STRING;
+"char"                          return CHAR;
+"bool"                          return BOOL;
+    /*Constant*/
+"const"                         return CONST;
+
+    /*Identifier and Numbers*/
+[a-zA-Z][_a-zA-Z0-9]*           return IDENTIFIER;
+[0-9]+                          return NUMBER;
+
+    /*Stop Characters*/
+"\n"                            return ENDLINE;
+";"                             return SEMICOLON;
 
 %%
 
