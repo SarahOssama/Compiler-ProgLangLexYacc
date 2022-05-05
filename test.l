@@ -13,7 +13,6 @@ void yyerror(char *s);
 "Hi"        return HI; 
 "Bye"       return BYE;
     /* Mathematical Expressions */
-"="         return ASSIGN;
 "+"         return PLUS;
 "-"         return MINUS;
 "*"         return MULT;
@@ -25,13 +24,29 @@ void yyerror(char *s);
 "*="        return MULT_EQ;
 "/="        return DIV_EQ;
 
-    /* SemiColon */
-";"				return SEMICOLON;
 
-    /* Identifier */
-[a-zA-Z][_a-zA-Z0-9]* return IDENTIFIER;
  
-.           return OTHER;
+
+    /*Types*/
+"int"                           return INT;  
+"float"                         return FLOAT;
+"string"                        return STRING;
+"char"                          return CHAR;
+"bool"                          return BOOL;
+    /*Constant*/
+"const"                         return CONST;
+
+    /*Identifier and Numbers*/
+[a-zA-Z][_a-zA-Z0-9]*           return IDENTIFIER;
+[0-9]+                          return NUMBER;
+
+    /*Operators*/
+        /*Assignment Operator*/
+"="				return EQUAL;
+
+    /*Stop Characters*/
+"\n"                            return ENDLINE;
+";"                             return SEMICOLON;
 
 %%
 
