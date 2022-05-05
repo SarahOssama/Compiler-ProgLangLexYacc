@@ -2,8 +2,8 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	// extern FILE *yyin;
-	// extern FILE *yyout;
+	extern FILE *yyin;
+	extern FILE *yyout;
 	extern int yylineno;
 	extern int yylex();
 	extern void yyerror(char *s);
@@ -28,7 +28,32 @@ type: 				INT | FLOAT | CHAR | STRING | BOOL;
 
 %%
 
-int main (void){
-	yyparse(); 
-	return 0;
+// int main (void){
+// 	yyparse(); 
+// 	return 0;
+// }
+
+
+
+int main (void)
+{
+    yyin = fopen("testfile.txt", "r+");
+    if (yyin == NULL)
+    {
+        printf("File Not Found\n");
+    }
+    else
+    {
+        printf(">>>> Test File <<<<\n\n");
+        FILE* testFile; char ch;
+        testFile = fopen("testfile.txt","r");
+        while((ch=fgetc(testFile))!=EOF)
+        {
+            printf("%c",ch);
+        }
+        printf("\n\n\n>>> Parsing <<<<\n\n");
+        yyparse();
+    }
+    fclose(yyin);
+    return 0;
 }
