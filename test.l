@@ -10,8 +10,27 @@ void yyerror(char *s);
 %}
 
 %%
-"Hi"        return HI;
+"Hi"        return HI; 
 "Bye"       return BYE;
+    /* Mathematical Expressions */
+"="         return ASSIGN;
+"+"         return PLUS;
+"-"         return MINUS;
+"*"         return MULT;
+"/"         return DIV;
+"++"        return INC;
+"--"        return DEC;
+"+="        return PLUS_EQ;
+"-="        return MINUS_EQ;
+"*="        return MULT_EQ;
+"/="        return DIV_EQ;
+
+    /* SemiColon */
+";"				return SEMICOLON;
+
+    /* Identifier */
+[a-zA-Z][_a-zA-Z0-9]* return IDENTIFIER;
+ 
 .           return OTHER;
 
 %%
