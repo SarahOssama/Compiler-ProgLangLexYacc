@@ -14,27 +14,32 @@
 %token SEMICOLON ENDLINE
 %token CONST
 %token IDENTIFIER NUMBER
-
+%token EQUAL
 
 %start program
 
 %%
 
-program: 			statements;
-statements: 		statements statement ENDLINE | statement ENDLINE;
-statement: 			var_declaration;
-var_declaration: 	type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
-type: 				INT | FLOAT | CHAR | STRING | BOOL;
+program: 				statements;
+statements: 			statements statement ENDLINE | statement ENDLINE;
+statement: 				var_declaration | expression;
+var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
+type: 					INT | FLOAT | CHAR | STRING | BOOL;
+expression: 			assignment_expression;
+assignment_expression: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};;
+value:					IDENTIFIER | NUMBER;
 
 %%
 
+
+//For reading from console
 // int main (void){
 // 	yyparse(); 
 // 	return 0;
 // }
 
 
-
+//For reading from file
 int main (void)
 {
     yyin = fopen("testfile.txt", "r+");

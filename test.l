@@ -24,6 +24,10 @@ void yyerror(char *s);
 [a-zA-Z][_a-zA-Z0-9]*           return IDENTIFIER;
 [0-9]+                          return NUMBER;
 
+    /*Operators*/
+        /*Assignment Operator*/
+"="				return EQUAL;
+
     /*Stop Characters*/
 "\n"                            return ENDLINE;
 ";"                             return SEMICOLON;
