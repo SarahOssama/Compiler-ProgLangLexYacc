@@ -46,9 +46,10 @@
 %token EQUAL
 
 
-// Token for while & do-while statment
+// Token for while & do-while & for statment
 %token WHILE
 %token DO
+%token FOR
 
 //Associativity
 // - Non Associative
@@ -76,6 +77,7 @@ statement :
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
+	| for_statement
 	;
 
 
@@ -94,6 +96,12 @@ while_statement:
 do_while_statement:
 	DO OPENCURL statement CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
 	;
+
+// for statment
+for_statement:
+	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL statement CLOSEDCURL {printf("for loop\n");}
+	;
+
  // Values
 value: IDENTIFIER |
 	NUMBER

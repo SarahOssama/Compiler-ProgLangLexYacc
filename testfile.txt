@@ -1,2 +1,1 @@
-while (x+=5) {z+=9;}
-do {z+=6;} while(x==6)
+for (int i = 5; i == 0; i++;){x = 7;}
