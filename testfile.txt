@@ -1,6 +1,39 @@
-{int x;
-a++;
+void f(int y)
+{
+    int x;
 }
-int x;
-{a++;
+
+for (int i = 5; i == 0; i++;){x = 7;}
+int x = 0;
+A+b;
+
+if (x+=5) then {z+=5;}
+x = 0;
+int foo() x = 0;
+void f1(bool y) y++;
+foo();
+int foo() {
+  int x;
+}
+int y = 0;
+void foo() {
+    return;
+}
+{
+    int x;
+}
+{
+    int x;
+    a++;
+}
+{
+    int x;
+    while (x==5) {z+=9;}
+}
+{
+    int x = 0;
+    A+b;
+    if (x+=5) then {z+=5;}
+    x = 0;
+    while (x==5) {z+=9;}
 }

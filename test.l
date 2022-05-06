@@ -42,15 +42,22 @@ void yyerror(char *s);
 "then"                          return THEN;
 "else"                          return ELSE;
 
-    /* brackets */
+    /* Brackets */
 "("                             return OPENBRACKET;
 ")"                             return CLOSEDBRACKET;
 "{"                             return OPENCURL;
 "}"                             return CLOSEDCURL;
 
-    /* while & do-whiile statment */
-"while"     return WHILE;
-"do"        return DO;
+    /*Functions*/
+"void"                          return VOID; 
+"return"                        return RETURN;  
+","                             return COMMA;
+":"                             return COLON;
+
+    /* While & do-while statment */
+"while"                         return WHILE;
+"do"                            return DO;
+"for"                           return FOR;
 
 
     /*Identifier and Numbers*/

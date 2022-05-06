@@ -26,6 +26,7 @@
 %token SEMICOLON 
 %token ENDLINE
 
+
 //Values 
 %token CONST
 %token IDENTIFIER
@@ -45,10 +46,16 @@
 //Assignment Operator
 %token EQUAL
 
+//Token for functions
+%token VOID
+%token RETURN
+%token COMMA
+%token COLON
 
-// Token for while & do-while statment
+// Token for while & do-while & for statment
 %token WHILE
 %token DO
+%token FOR
 
 //Associativity
 // - Non Associative
@@ -69,6 +76,8 @@ program: statements;
 statements : 
  statements statement  ENDLINE
 | statement  ENDLINE
+| ENDLINE statements 
+| statements ENDLINE;
 | OPENCURL statements CLOSEDCURL ENDLINE
 ;
 
@@ -81,6 +90,11 @@ statement :
 	| while_statement 
 	| do_while_statement
 	/* | block_statement */
+	| for_statement
+	| function							{printf("Function \n");}
+	| function_call						{printf("Function Call \n");}
+	| OPENCURL ENDLINE statements CLOSEDCURL;
+	| RETURN return_value SEMICOLON
 	;
 
 
@@ -104,6 +118,12 @@ while_statement:
 do_while_statement:
 	DO OPENCURL statement CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
 	;
+
+// for statment
+for_statement:
+	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL statement CLOSEDCURL {printf("for loop\n");}
+	;
+
  // Values
 value: IDENTIFIER |
 	NUMBER
@@ -137,11 +157,22 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
+var_declaration: 		type IDENTIFIER SEMICOLON;
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");} | IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};
 
-
+function: 				function_prototype statements;
+return_value: 			value | ;	
+function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
+						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET;
+						| VOID IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
+						| VOID IDENTIFIER OPENBRACKET CLOSEDBRACKET;
+parameters: 			parameters COMMA single_parameter | single_parameter ;
+single_parameter: 		type IDENTIFIER | type IDENTIFIER EQUAL constant ;
+constant: 				NUMBER | STRING;
+function_call: 			IDENTIFIER OPENBRACKET call_parameters CLOSEDBRACKET SEMICOLON ;
+call_parameters:		call_parameter |;
+call_parameter:			call_parameter COMMA value | value ;
 
 %%
 
