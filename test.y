@@ -26,6 +26,7 @@
 %token SEMICOLON 
 %token ENDLINE
 
+
 //Values 
 %token CONST
 %token IDENTIFIER
@@ -45,6 +46,11 @@
 //Assignment Operator
 %token EQUAL
 
+//Token for functions
+%token VOID
+%token RETURN
+%token COMMA
+%token COLON
 
 // Token for while & do-while statment
 %token WHILE
@@ -76,6 +82,7 @@ statement :
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
+	| function							{printf("Function \n");}
 	;
 
 
@@ -131,7 +138,14 @@ var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declarat
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");} | IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};
 
-
+function: 				function_prototype statement;
+function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
+						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET;
+						| VOID IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
+						| VOID IDENTIFIER OPENBRACKET CLOSEDBRACKET;
+parameters: 			parameters COMMA single_parameter | single_parameter ;
+single_parameter: 		type IDENTIFIER | type IDENTIFIER EQUAL constant ;
+constant: 				NUMBER | STRING;
 
 %%
 

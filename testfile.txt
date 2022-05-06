@@ -1,2 +1,6 @@
-while (x+=5) {z+=9;}
-do {z+=6;} while(x==6)
+int x = 0;
+A+b;
+if (x+=5) then {z+=5;}
+x = 0;
+int foo() x = 0;
+void f1(bool y) y++;
