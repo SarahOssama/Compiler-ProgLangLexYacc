@@ -84,6 +84,8 @@ statement :
 	| do_while_statement
 	| function							{printf("Function \n");}
 	| function_call						{printf("Function Call \n");}
+	| OPENCURL ENDLINE statements CLOSEDCURL;
+	| RETURN return_value SEMICOLON
 	;
 
 
@@ -135,11 +137,12 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
+var_declaration: 		type IDENTIFIER SEMICOLON;
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");} | IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};
 
-function: 				function_prototype statement;
+function: 				function_prototype statements;
+return_value: 			value | ;	
 function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
 						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET;
 						| VOID IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
