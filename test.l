@@ -11,21 +11,21 @@ void yyerror(char *s);
 
 %%
     /* Mathematical Expressions */
-"+"         return PLUS;
-"-"         return MINUS;
-"*"         return MULT;
-"/"         return DIV;
-"++"        return INC;
-"--"        return DEC;
-"+="        return PLUS_EQ;
-"-="        return MINUS_EQ;
-"*="        return MULT_EQ;
-"/="        return DIV_EQ;
+"+"                             return PLUS;
+"-"                             return MINUS;
+"*"                             return MULT;
+"/"                             return DIV;
+"++"                            return INC;
+"--"                            return DEC;
+"+="                            return PLUS_EQ;
+"-="                            return MINUS_EQ;
+"*="                            return MULT_EQ;
+"/="                            return DIV_EQ;
 
     /* Logical Expressions */
-"&&"        return AND;
-"||"        return OR;
-"!"         return NOT;
+"&&"                            return AND;
+"||"                            return OR;
+"!"                             return NOT;
 
     /*Types*/
 "int"                           return INT;  
@@ -37,15 +37,15 @@ void yyerror(char *s);
 "const"                         return CONST;
 
     /* if then else statment */
-"if"        return IF;
-"then"      return THEN;
-"else"      return ELSE;
+"if"                            return IF;
+"then"                          return THEN;
+"else"                          return ELSE;
 
     /* brackets */
-"("         return OPENBRACKET;
-")"         return CLOSEDBRACKET;
-"{"         return OPENCURL;
-"}"         return CLOSEDCURL;
+"("                             return OPENBRACKET;
+")"                             return CLOSEDBRACKET;
+"{"                             return OPENCURL;
+"}"                             return CLOSEDCURL;
 
 
     /*Identifier and Numbers*/
@@ -54,7 +54,7 @@ void yyerror(char *s);
 
     /*Operators*/
     /*Assignment Operator*/
-"="				return EQUAL;
+"="				                return EQUAL;
 
     /*Stop Characters*/
 "\n"                            return ENDLINE;
