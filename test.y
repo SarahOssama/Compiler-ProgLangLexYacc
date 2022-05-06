@@ -97,7 +97,7 @@ expression:
 	
 var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};;
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");} | IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};
 
 
 
