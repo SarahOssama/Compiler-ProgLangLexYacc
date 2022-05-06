@@ -1,12 +1,18 @@
+void f(int y)
+{
+    int x;
+}
+
 int x = 0;
 A+b;
+
 if (x+=5) then {z+=5;}
 x = 0;
 int foo() x = 0;
 void f1(bool y) y++;
 foo();
 int foo() {
-    int x;
+  int x;
 }
 int y = 0;
 void foo() {
