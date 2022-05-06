@@ -10,36 +10,49 @@
 	int yydebug=1;
 %}
 
+//Mathermatical Expressions
 %token PLUS MINUS MULT DIV 
 %token INC DEC
 %token PLUS_EQ MINUS_EQ MULT_EQ DIV_EQ
 
+//Logical Expressions
 %token AND OR NOT
 
+//Declarations
 %token INT FLOAT STRING CHAR BOOL
-%token SEMICOLON ENDLINE
+
+//Stop Characters
+%token SEMICOLON 
+%token ENDLINE
+
+//Values 
 %token CONST
-%token IDENTIFIER NUMBER
-%token EQUAL
-
-%nonassoc OR AND NOT
-
-%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC
-%left MULT DIV MULT_EQ DIV_EQ
-
+%token IDENTIFIER
+%token NUMBER
 
 // Token for if then else 
-	%token IF
-	%token THEN
-	%token ELSE
+%token IF
+%token THEN
+%token ELSE
 
 // Token for brackets
-	%token OPENBRACKET
-	%token CLOSEDBRACKET
-	%token OPENCURL
-	%token CLOSEDCURL
+%token OPENBRACKET
+%token CLOSEDBRACKET
+%token OPENCURL
+%token CLOSEDCURL
 
+//Assignment Operator
+%token EQUAL
+
+
+//Associativity
+// - Non Associative
+%nonassoc OR AND NOT
 %nonassoc IFX
+
+// - Left Associative
+%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC
+%left MULT DIV MULT_EQ DIV_EQ
 
 
 %start program
@@ -51,10 +64,10 @@ program: statements;
 statements : statements statement ENDLINE | statement ENDLINE;
 
 statement : 
-	expression_statement |
-	assignment_statement |
-	var_declaration |
-	if_statement
+	  expression_statement 				{printf("Expression Statement \n");}
+	| assignment_statement				{printf("Assignment Statement \n");}
+	| var_declaration 					{printf("Variable Declaration \n");}
+	| if_statement						{printf("If Statement \n");}
 	;
 
 
