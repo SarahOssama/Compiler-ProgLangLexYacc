@@ -10,8 +10,6 @@ void yyerror(char *s);
 %}
 
 %%
-"Hi"        return HI; 
-"Bye"       return BYE;
     /* Mathematical Expressions */
 "+"         return PLUS;
 "-"         return MINUS;
@@ -38,6 +36,18 @@ void yyerror(char *s);
     /*Constant*/
 "const"                         return CONST;
 
+    /* if then else statment */
+"if"        return IF;
+"then"      return THEN;
+"else"      return ELSE;
+
+    /* brackets */
+"("         return OPENBRACKET;
+")"         return CLOSEDBRACKET;
+"{"         return OPENCURL;
+"}"         return CLOSEDCURL;
+
+
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           return IDENTIFIER;
 [0-9]+                          return NUMBER;
@@ -49,6 +59,7 @@ void yyerror(char *s);
     /*Stop Characters*/
 "\n"                            return ENDLINE;
 ";"                             return SEMICOLON;
+
 
 %%
 
