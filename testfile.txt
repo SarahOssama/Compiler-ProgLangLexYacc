@@ -1,4 +1,2 @@
-int x = 0;
-A+b;
-if (x+=5) then {z+=5;}
-x = 0;
+while (x+=5) {z+=9;}
+do {z+=6;} while(x==6)

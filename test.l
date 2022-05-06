@@ -11,20 +11,6 @@ void yyerror(char *s);
 
 %%
     /* Mathematical Expressions */
-"+"         return PLUS;
-"-"         return MINUS;
-"*"         return MULT;
-"/"         return DIV;
-"++"        return INC;
-"--"        return DEC;
-"+="        return PLUS_EQ;
-"-="        return MINUS_EQ;
-"*="        return MULT_EQ;
-"/="        return DIV_EQ;
-"=="        return EQ_EQ;
-
-
- 
 "+"                             return PLUS;
 "-"                             return MINUS;
 "*"                             return MULT;
@@ -35,6 +21,7 @@ void yyerror(char *s);
 "-="                            return MINUS_EQ;
 "*="                            return MULT_EQ;
 "/="                            return DIV_EQ;
+"=="                            return EQ_EQ;
 
     /* Logical Expressions */
 "&&"                            return AND;

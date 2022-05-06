@@ -18,8 +18,7 @@
 //Logical Expressions
 %token AND OR NOT
 
-%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC EQ_EQ
-%left MULT DIV MULT_EQ DIV_EQ
+
 //Declarations
 %token INT FLOAT STRING CHAR BOOL
 
@@ -57,7 +56,7 @@
 %nonassoc IFX
 
 // - Left Associative
-%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC
+%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC EQ_EQ
 %left MULT DIV MULT_EQ DIV_EQ
 
 
@@ -70,16 +69,13 @@ program: statements;
 statements : statements statement ENDLINE | statement ENDLINE;
 
 statement : 
-	expression_statement 
-	|assignment_statement 
-	|var_declaration 
-	|if_statement 
-	|while_statement 
-	|do_while_statement 
-	| expression_statement 				{printf("Expression Statement \n");}
+	
+	expression_statement 				{printf("Expression Statement \n");}
 	| assignment_statement				{printf("Assignment Statement \n");}
 	| var_declaration 					{printf("Variable Declaration \n");}
 	| if_statement						{printf("If Statement \n");}
+	| while_statement 
+	| do_while_statement
 	;
 
 
@@ -117,6 +113,8 @@ expression:
 	expression MINUS_EQ expression |
 	expression MULT_EQ expression |
 	expression DIV_EQ expression |
+	expression EQ_EQ expression |
+
 
 	expression INC |
 	INC expression |
