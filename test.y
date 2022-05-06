@@ -24,6 +24,22 @@
 %token IDENTIFIER NUMBER
 %token EQUAL
 
+
+
+// Token for if then else 
+	%token IF
+	%token THEN
+	%token ELSE
+
+// Token for brackets
+	%token OPENBRACKET
+	%token CLOSEDBRACKET
+	%token OPENCURL
+	%token CLOSEDCURL
+
+%nonassoc IFX
+
+
 %start program
 
 %%
@@ -35,7 +51,15 @@ statements : statements statement ENDLINE | statement ENDLINE;
 statement : 
 	expression_statement |
 	assignment_statement |
-	var_declaration
+	var_declaration |
+	if_statement
+	;
+
+
+// if statment
+if_statement: 
+		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL  {printf("If then statement\n");}
+		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL {printf("If then else statement\n");}
 	;
 
  // Values
@@ -67,6 +91,8 @@ expression:
 var_declaration: 		type IDENTIFIER SEMICOLON {printf("Parsed a variable declaration\n");};
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};;
+
+
 
 %%
 
