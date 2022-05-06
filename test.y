@@ -13,10 +13,10 @@
 %token HI BYE OTHER
 %token PLUS MINUS MULT DIV 
 %token INC DEC
-%token PLUS_EQ MINUS_EQ MULT_EQ DIV_EQ
+%token PLUS_EQ MINUS_EQ MULT_EQ DIV_EQ EQ_EQ
 
 
-%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC
+%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC EQ_EQ
 %left MULT DIV MULT_EQ DIV_EQ
 %token INT FLOAT STRING CHAR BOOL
 %token SEMICOLON ENDLINE
@@ -37,6 +37,10 @@
 	%token OPENCURL
 	%token CLOSEDCURL
 
+// Token for while & do-while statment
+	%token WHILE
+	%token DO
+
 %nonassoc IFX
 
 
@@ -52,7 +56,9 @@ statement :
 	expression_statement |
 	assignment_statement |
 	var_declaration |
-	if_statement
+	if_statement |
+	while_statement |
+	do_while_statement
 	;
 
 
@@ -61,7 +67,16 @@ if_statement:
 		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL  {printf("If then statement\n");}
 		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL {printf("If then else statement\n");}
 	;
+// while statment
+while_statement:
+		WHILE OPENBRACKET expression CLOSEDBRACKET OPENCURL statement CLOSEDCURL   {printf("while statment\n");}
+		| WHILE
+		;
 
+// do while statment
+do_while_statement:
+	DO OPENCURL statement CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
+	;
  // Values
 value: IDENTIFIER |
 	NUMBER

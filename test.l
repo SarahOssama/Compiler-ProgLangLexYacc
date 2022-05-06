@@ -23,6 +23,7 @@ void yyerror(char *s);
 "-="        return MINUS_EQ;
 "*="        return MULT_EQ;
 "/="        return DIV_EQ;
+"=="        return EQ_EQ;
 
 
  
@@ -46,6 +47,10 @@ void yyerror(char *s);
 ")"         return CLOSEDBRACKET;
 "{"         return OPENCURL;
 "}"         return CLOSEDCURL;
+
+    /* while & do-whiile statment */
+"while"     return WHILE;
+"do"        return DO;
 
 
     /*Identifier and Numbers*/
