@@ -10,8 +10,6 @@ void yyerror(char *s);
 %}
 
 %%
-"Hi"        return HI; 
-"Bye"       return BYE;
     /* Mathematical Expressions */
 "+"         return PLUS;
 "-"         return MINUS;
@@ -27,6 +25,21 @@ void yyerror(char *s);
 
 
  
+"+"                             return PLUS;
+"-"                             return MINUS;
+"*"                             return MULT;
+"/"                             return DIV;
+"++"                            return INC;
+"--"                            return DEC;
+"+="                            return PLUS_EQ;
+"-="                            return MINUS_EQ;
+"*="                            return MULT_EQ;
+"/="                            return DIV_EQ;
+
+    /* Logical Expressions */
+"&&"                            return AND;
+"||"                            return OR;
+"!"                             return NOT;
 
     /*Types*/
 "int"                           return INT;  
@@ -38,15 +51,15 @@ void yyerror(char *s);
 "const"                         return CONST;
 
     /* if then else statment */
-"if"        return IF;
-"then"      return THEN;
-"else"      return ELSE;
+"if"                            return IF;
+"then"                          return THEN;
+"else"                          return ELSE;
 
     /* brackets */
-"("         return OPENBRACKET;
-")"         return CLOSEDBRACKET;
-"{"         return OPENCURL;
-"}"         return CLOSEDCURL;
+"("                             return OPENBRACKET;
+")"                             return CLOSEDBRACKET;
+"{"                             return OPENCURL;
+"}"                             return CLOSEDCURL;
 
     /* while & do-whiile statment */
 "while"     return WHILE;
@@ -58,8 +71,8 @@ void yyerror(char *s);
 [0-9]+                          return NUMBER;
 
     /*Operators*/
-        /*Assignment Operator*/
-"="				return EQUAL;
+    /*Assignment Operator*/
+"="				                return EQUAL;
 
     /*Stop Characters*/
 "\n"                            return ENDLINE;
