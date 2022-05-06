@@ -83,6 +83,7 @@ statement :
 	| while_statement 
 	| do_while_statement
 	| function							{printf("Function \n");}
+	| function_call						{printf("Function Call \n");}
 	;
 
 
@@ -146,6 +147,9 @@ function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
 parameters: 			parameters COMMA single_parameter | single_parameter ;
 single_parameter: 		type IDENTIFIER | type IDENTIFIER EQUAL constant ;
 constant: 				NUMBER | STRING;
+function_call: 			IDENTIFIER OPENBRACKET call_parameters CLOSEDBRACKET SEMICOLON ;
+call_parameters:		call_parameter |;
+call_parameter:			call_parameter COMMA value | value ;
 
 %%
 

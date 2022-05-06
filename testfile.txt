@@ -4,3 +4,4 @@ if (x+=5) then {z+=5;}
 x = 0;
 int foo() x = 0;
 void f1(bool y) y++;
+foo();
