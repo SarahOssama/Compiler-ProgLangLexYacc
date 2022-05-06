@@ -1,2 +1,6 @@
-while (x+=5) {z+=9;}
-do {z+=6;} while(x==6)
+{int x;
+a++;
+}
+int x;
+{a++;
+}

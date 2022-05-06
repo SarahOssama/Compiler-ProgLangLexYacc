@@ -66,7 +66,11 @@
 
 program: statements;
 
-statements : statements statement ENDLINE | statement ENDLINE;
+statements : 
+ statements statement  ENDLINE
+| statement  ENDLINE
+| OPENCURL statements CLOSEDCURL ENDLINE
+;
 
 statement : 
 	
@@ -76,8 +80,14 @@ statement :
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
+	/* | block_statement */
 	;
 
+
+/* // Block of code
+block_statement : 
+	OPENCURL statement CLOSEDCURL ENDLINE 		{printf("Block Statement \n");}
+	; */
 
 // if statment
 if_statement: 
