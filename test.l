@@ -24,8 +24,10 @@ void yyerror(char *s);
 "*="        return MULT_EQ;
 "/="        return DIV_EQ;
 
-
- 
+    /* Logical Expressions */
+"&&"        return AND;
+"||"        return OR;
+"!"         return NOT;
 
     /*Types*/
 "int"                           return INT;  
@@ -41,7 +43,7 @@ void yyerror(char *s);
 [0-9]+                          return NUMBER;
 
     /*Operators*/
-        /*Assignment Operator*/
+    /*Assignment Operator*/
 "="				return EQUAL;
 
     /*Stop Characters*/
