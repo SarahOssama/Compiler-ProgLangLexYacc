@@ -57,7 +57,7 @@ void yyerror(char *s);
     /* While & do-while statment */
 "while"                         return WHILE;
 "do"                            return DO;
-
+"for"                           return FOR;
 
 
     /*Identifier and Numbers*/

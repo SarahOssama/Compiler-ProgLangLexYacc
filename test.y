@@ -52,9 +52,10 @@
 %token COMMA
 %token COLON
 
-// Token for while & do-while statment
+// Token for while & do-while & for statment
 %token WHILE
 %token DO
+%token FOR
 
 //Associativity
 // - Non Associative
@@ -72,7 +73,7 @@
 
 program: statements;
 
-statements : statements statement ENDLINE | statement ENDLINE;
+statements : statements statement ENDLINE | statement ENDLINE | ENDLINE statements | statements ENDLINE;
 
 statement : 
 	
@@ -82,6 +83,7 @@ statement :
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
+	| for_statement
 	| function							{printf("Function \n");}
 	| function_call						{printf("Function Call \n");}
 	| OPENCURL ENDLINE statements CLOSEDCURL;
@@ -104,6 +106,12 @@ while_statement:
 do_while_statement:
 	DO OPENCURL statement CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
 	;
+
+// for statment
+for_statement:
+	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL statement CLOSEDCURL {printf("for loop\n");}
+	;
+
  // Values
 value: IDENTIFIER |
 	NUMBER
