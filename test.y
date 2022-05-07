@@ -56,6 +56,7 @@
 %token DO
 %token FOR
 
+
 //Associativity
 // - Non Associative
 %nonassoc OR AND NOT
@@ -73,11 +74,8 @@
 program: statements;
 
 statements : 
- statements statement  ENDLINE
-| statement  ENDLINE
-| ENDLINE statements 
-| statements ENDLINE;
-| OPENCURL statements CLOSEDCURL ENDLINE
+ statements statement
+| statement
 ;
 
 statement : 
@@ -93,7 +91,7 @@ statement :
 	| for_statement
 	| function							{printf("Function \n");}
 	| function_call						{printf("Function Call \n");}
-	| OPENCURL ENDLINE statements CLOSEDCURL;
+	| OPENCURL statements CLOSEDCURL;
 	| RETURN return_value SEMICOLON
 	;
 
@@ -163,6 +161,7 @@ assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON | IDENTIFIER EQUAL 
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 
 function: 				function_prototype statements;
+						
 return_value: 			value | ;	
 function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
 						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET;

@@ -2,7 +2,7 @@
 
 
 #include<stdio.h>
-int yylineno = 1; // initialize to 1
+int yylineno = 1; //Initialize
 void yyerror(char *s);
 #include "test.tab.h"
 
@@ -69,9 +69,9 @@ void yyerror(char *s);
 "="				                return EQUAL;
 
     /*Stop Characters*/
-"\n"                            return ENDLINE;
+"\n"                            {yylineno += 1;}
+[\t\r]+                         ;
 ";"                             return SEMICOLON;
-
 
 %%
 
