@@ -3,7 +3,6 @@
 	#include <stdlib.h>
 	#include <string.h>
 	extern FILE *yyin;
-	extern FILE *yyout;
 	extern int yylineno;
 	extern int yylex();
 	extern void yyerror(char *s);
@@ -86,6 +85,7 @@ statement :
 	expression_statement 				{printf("Expression Statement \n");}
 	| assignment_statement				{printf("Assignment Statement \n");}
 	| var_declaration 					{printf("Variable Declaration \n");}
+	| constant_declaration				{printf("Constant Declaration \n");}
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
@@ -159,7 +159,8 @@ expression:
 	
 var_declaration: 		type IDENTIFIER SEMICOLON;
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");} | IDENTIFIER EQUAL value SEMICOLON {printf("Parsed an assignment expression\n");};
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON | IDENTIFIER EQUAL value SEMICOLON ;
+constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 
 function: 				function_prototype statements;
 return_value: 			value | ;	
