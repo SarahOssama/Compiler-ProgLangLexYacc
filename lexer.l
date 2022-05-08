@@ -4,7 +4,7 @@
 #include<stdio.h>
 int yylineno = 1; //Initialize
 void yyerror(char *s);
-#include "test.tab.h"
+#include "parser.tab.h"
 
 
 %}
@@ -21,7 +21,14 @@ void yyerror(char *s);
 "-="                            return MINUS_EQ;
 "*="                            return MULT_EQ;
 "/="                            return DIV_EQ;
+   
+    /* Comparison Op*/
+">="                            return GE;
+"<="                            return LE;
 "=="                            return EQ_EQ;
+"!="                            return NE;
+"<"				                return LT;
+">"				                return GT;
 
     /* Logical Expressions */
 "&&"                            return AND;

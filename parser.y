@@ -52,7 +52,7 @@
 %token COLON
 
 // Token for while & do-while & for statment
-%token WHILE
+%token WHILEEQ_EQ WHILE
 %token DO
 %token FOR
 
@@ -63,9 +63,9 @@
 %nonassoc IFX
 
 // - Left Associative
-%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC EQ_EQ
+%left PLUS MINUS PLUS_EQ MINUS_EQ INC DEC
 %left MULT DIV MULT_EQ DIV_EQ
-
+%left GE LE EQ_EQ NE GT LT
 
 %start program
 
@@ -87,11 +87,10 @@ statement :
 	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
-	/* | block_statement */
 	| for_statement
 	| function							{printf("Function \n");}
 	| function_call						{printf("Function Call \n");}
-	| OPENCURL statements CLOSEDCURL;
+	| OPENCURL statements CLOSEDCURL
 	| RETURN return_value SEMICOLON
 	;
 
@@ -101,12 +100,12 @@ block_statement :
 	OPENCURL statement CLOSEDCURL ENDLINE 		{printf("Block Statement \n");}
 	; */
 
-// if statment
+//if statment
 if_statement: 
 		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL  {printf("If then statement\n");}
 		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL {printf("If then else statement\n");}
 	;
-// while statment
+//while statment
 while_statement:
 		WHILE OPENBRACKET expression CLOSEDBRACKET OPENCURL statement CLOSEDCURL   {printf("while statment\n");}
 		| WHILE
@@ -143,11 +142,18 @@ expression:
 	expression DIV_EQ expression |
 	expression EQ_EQ expression |
 
+	expression GE expression |
+	expression LE expression |
+	
+	expression NE expression |
+	expression GT expression |
+	expression LT expression |
+
 
 	expression INC |
-	INC expression |
+	// INC expression |
 	expression DEC |
-	DEC expression |
+	// DEC expression |
 
 	expression AND expression |
 	expression OR expression |
@@ -164,7 +170,7 @@ function: 				function_prototype statements;
 						
 return_value: 			value | ;	
 function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
-						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET;
+						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET
 						| VOID IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
 						| VOID IDENTIFIER OPENBRACKET CLOSEDBRACKET;
 parameters: 			parameters COMMA single_parameter | single_parameter ;
