@@ -166,7 +166,7 @@ type: 					INT | FLOAT | CHAR | STRING | BOOL;
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON | IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 
-function: 				function_prototype statements;
+function: 				function_prototype statement;
 						
 return_value: 			value | ;	
 function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
