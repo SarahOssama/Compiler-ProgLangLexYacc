@@ -97,18 +97,15 @@ typedef union YYSTYPE
 /* Line 1676 of yacc.c  */
 #line 21 "parser.y"
 
-    int intVal;                 
-    char* charVal;               
-	float floatVal; 
-	char* ID; 
-	char* string; 
-	int tr;
-	int fl;           
+    int intValue;        	/* integer value */
+    float floatValue;       /* float value */
+    char charValue;       	/* character value */
+    char* stringValue; 		/* string value */     
 
 
 
 /* Line 1676 of yacc.c  */
-#line 112 "parser.tab.h"
+#line 109 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -19,13 +19,10 @@
 
 
 %union {
-    int intVal;                 
-    char* charVal;               
-	float floatVal; 
-	char* ID; 
-	char* string; 
-	int tr;
-	int fl;           
+    int intValue;        	/* integer value */
+    float floatValue;       /* float value */
+    char charValue;       	/* character value */
+    char* stringValue; 		/* string value */     
 };
 
 //Mathermatical Expressions
@@ -49,9 +46,9 @@
 %token CONST
 %token IDENTIFIER
 %token NUMBER
-%type <ID> IDENTIFIER
-%type <intVal> NUMBER
-%type <intVal> expression
+%type <stringValue> IDENTIFIER
+%type <intValue> NUMBER
+%type <intValue> expression
 
 
 

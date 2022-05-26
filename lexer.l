@@ -70,13 +70,13 @@ void yyerror(char *s);
 
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           {   
-                                    yylval.ID = yytext;
+                                    yylval.stringValue = yytext;
                                     
                                     return IDENTIFIER;
                                 }
 
 [0-9]+                          { 
-                                    yylval.intVal = atoi(yytext); 
+                                    yylval.intValue = atoi(yytext); 
                                     return NUMBER;}
 
     /*Operators*/
