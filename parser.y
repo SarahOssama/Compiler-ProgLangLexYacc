@@ -3,7 +3,7 @@
 	#include <stdlib.h>
 	#include <stdarg.h>
 	#include <string.h>
-
+	#include "symbolTable.cpp"
 
 	extern FILE *yyin;
 	extern int yylineno;
@@ -228,6 +228,7 @@ void test(int x)
 //For reading from file
 int main (void)
 {
+	print_test();
     yyin = fopen("testfile.txt", "r+");
     if (yyin == NULL)
     {
