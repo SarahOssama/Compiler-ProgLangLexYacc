@@ -190,8 +190,12 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {printf("Identifier: %s\n",$2);};
-type: 					INT | FLOAT | CHAR | STRING | BOOL;
+var_declaration: 		type IDENTIFIER SEMICOLON {print_test(type_val); initiateINT($2,false,type_val,-1,0,0,yylineno);};
+type: 			INT {type_val= INT_VAL;} |
+				FLOAT{type_val= FLOAT_VAL;} |
+				CHAR{type_val=CHAR_VAL;} |
+				STRING {type_val= STRING_VAL;}|
+				BOOL{type_val= BOOL_VAL;};
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
@@ -228,7 +232,7 @@ void test(int x)
 //For reading from file
 int main (void)
 {
-	print_test();
+	/* print_test(); */
     yyin = fopen("testfile.txt", "r+");
     if (yyin == NULL)
     {
@@ -245,6 +249,7 @@ int main (void)
         }
         printf("\n\n\n>>> Parsing <<<<\n\n");
         yyparse();
+				writeSymbolTable(symbols);
     }
     fclose(yyin);
 	/* yyparse(); */
