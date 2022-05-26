@@ -91,7 +91,25 @@
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+{
+
+/* Line 1676 of yacc.c  */
+#line 21 "parser.y"
+
+    int intVal;                 
+    char* charVal;               
+	float floatVal; 
+	char* ID; 
+	char* string; 
+	int tr;
+	int fl;           
+
+
+
+/* Line 1676 of yacc.c  */
+#line 112 "parser.tab.h"
+} YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

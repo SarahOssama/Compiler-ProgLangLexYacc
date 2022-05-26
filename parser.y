@@ -1,13 +1,32 @@
 %{
 	#include <stdio.h>
 	#include <stdlib.h>
+	#include <stdarg.h>
 	#include <string.h>
+
+
 	extern FILE *yyin;
 	extern int yylineno;
 	extern int yylex();
 	extern void yyerror(char *s);
 	int yydebug=1;
+
+	//test
+	void test(int);
+	int t = 9;
+
 %}
+
+
+%union {
+    int intVal;                 
+    char* charVal;               
+	float floatVal; 
+	char* ID; 
+	char* string; 
+	int tr;
+	int fl;           
+};
 
 //Mathermatical Expressions
 %token PLUS MINUS MULT DIV 
@@ -30,6 +49,11 @@
 %token CONST
 %token IDENTIFIER
 %token NUMBER
+%type <ID> IDENTIFIER
+%type <intVal> NUMBER
+%type <intVal> expression
+
+
 
 // Token for if then else 
 %token IF
@@ -57,6 +81,7 @@
 %token FOR
 
 
+
 //Associativity
 // - Non Associative
 %nonassoc OR AND NOT
@@ -81,7 +106,9 @@ statements :
 statement : 
 	
 	expression_statement 				{printf("Expression Statement \n");}
-	| assignment_statement				{printf("Assignment Statement \n");}
+	| assignment_statement				{	
+											printf("Assignment Statement \n");
+										}
 	| var_declaration 					{printf("Variable Declaration \n");}
 	| constant_declaration				{printf("Constant Declaration \n");}
 	| if_statement						{printf("If Statement \n");}
@@ -122,15 +149,20 @@ for_statement:
 	;
 
  // Values
-value: IDENTIFIER |
-	NUMBER
+value: IDENTIFIER {printf("IDENTIFIER: %s\n",$1);}|
+	NUMBER {printf("NUMBER: %d\n",$1);}
 ;
 
 //  Mathematical Expressions
 expression_statement: expression SEMICOLON;
 
 expression:
-	expression PLUS expression |
+	expression PLUS expression {
+									printf("Expression: %d + %d\n", $1, $3);
+									$$ = $1 + $3;
+									printf("$$: %d\n", $$);
+								} 
+	|
 	expression MINUS expression |
 	expression MULT expression |
 	expression DIV expression |
@@ -161,9 +193,10 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON;
+var_declaration: 		type IDENTIFIER SEMICOLON {printf("Identifier: %s\n",$2);};
 type: 					INT | FLOAT | CHAR | STRING | BOOL;
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON | IDENTIFIER EQUAL value SEMICOLON ;
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON
+						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 
 function: 				function_prototype statement;
@@ -181,6 +214,11 @@ call_parameters:		call_parameter |;
 call_parameter:			call_parameter COMMA value | value ;
 
 %%
+
+void test(int x)
+{
+	printf("TEST\n");
+}
 
 
 //For reading from console

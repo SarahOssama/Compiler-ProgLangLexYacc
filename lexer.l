@@ -36,7 +36,8 @@ void yyerror(char *s);
 "!"                             return NOT;
 
     /*Types*/
-"int"                           return INT;  
+"int"                           return INT; 
+                             
 "float"                         return FLOAT;
 "string"                        return STRING;
 "char"                          return CHAR;
@@ -68,8 +69,15 @@ void yyerror(char *s);
 
 
     /*Identifier and Numbers*/
-[a-zA-Z][_a-zA-Z0-9]*           return IDENTIFIER;
-[0-9]+                          return NUMBER;
+[a-zA-Z][_a-zA-Z0-9]*           {   
+                                    yylval.ID = yytext;
+                                    
+                                    return IDENTIFIER;
+                                }
+
+[0-9]+                          { 
+                                    yylval.intVal = atoi(yytext); 
+                                    return NUMBER;}
 
     /*Operators*/
     /*Assignment Operator*/
