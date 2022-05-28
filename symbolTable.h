@@ -11,6 +11,7 @@ using namespace std;
 
 FILE* errors;
 FILE* symbolTable;
+FILE* quad;
 
 
 struct value
@@ -68,7 +69,15 @@ int createEntry(char *VarName, bool isConst, int type, int Value, bool isInit, b
 
 void printSymbol(symbolTableEntry *symbol);
 
-void triples(string opType, string src, char* dest);
+void triples(string opType, string src, string dest);
 
-void quadruples(string opType, string src1, string src2, char* dest);
+void quadruples(string opType, string src1, string src2, string dest);
+
+string getRegister();
+
+string getRegValue(struct value Value);
+string stringToHex(string s1);
+
+
+
 

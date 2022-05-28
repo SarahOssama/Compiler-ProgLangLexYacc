@@ -116,7 +116,13 @@ enum type {
                                     yylval.lexemeValue.floatValue = atof(yytext);
                                     yylval.lexemeValue.type = FLOAT_VAL;
                                     return FLOAT_NUMBER;                                 
-                                }       
+                                }   
+[a-zA-Z0-9]                     {   
+                                    yylval.lexemeValue.charValue = yytext[0];
+                                    yylval.lexemeValue.type = CHAR_VAL;
+                                    return CHAR;
+                                } 
+    
     /*Operators*/   
     /*Assignment Operator*/
 "="				                return EQUAL;

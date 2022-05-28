@@ -527,9 +527,9 @@ static const yytype_uint16 yyrline[] =
      145,   145,   150,   150,   150,   154,   155,   156,   157,   158,
      159,   163,   166,   172,   173,   174,   175,   177,   178,   179,
      180,   181,   183,   184,   186,   187,   188,   191,   193,   196,
-     197,   198,   202,   219,   223,   227,   231,   235,   239,   252,
-     264,   279,   281,   281,   282,   283,   284,   285,   286,   286,
-     287,   287,   288,   288,   288,   289,   290,   290,   291,   291
+     197,   198,   202,   219,   223,   227,   231,   235,   239,   257,
+     269,   284,   286,   286,   287,   288,   289,   290,   291,   291,
+     292,   292,   293,   293,   293,   294,   295,   295,   296,   296
 };
 #endif
 
@@ -1863,6 +1863,11 @@ yyreduce:
 																Value.charValue = (yyvsp[(4) - (5)].lexemeValue).charValue;
 																Value.boolValue = (yyvsp[(4) - (5)].lexemeValue).boolValue;														
 																Value.floatValue = (yyvsp[(4) - (5)].lexemeValue).floatValue;
+																
+																getRegister();
+																printf ("register is %s", getRegister());
+
+																// triples("MOV", )
 
 																createEntry(Value, false, (yyvsp[(1) - (5)].intValue), true,
 																false, yylineno);
@@ -1872,7 +1877,7 @@ yyreduce:
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 252 "parser.y"
+#line 257 "parser.y"
     {	
 																struct value Value;
 																Value.type = (yyvsp[(3) - (4)].lexemeValue).type;
@@ -1890,7 +1895,7 @@ yyreduce:
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 265 "parser.y"
+#line 270 "parser.y"
     {
 																struct value Value;
 																Value.type = (yyvsp[(5) - (6)].lexemeValue).type;
@@ -1909,7 +1914,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1913 "parser.tab.c"
+#line 1918 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2121,7 +2126,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 293 "parser.y"
+#line 298 "parser.y"
 
 
 void test(int x)

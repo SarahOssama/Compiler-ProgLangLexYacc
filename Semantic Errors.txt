@@ -1,5 +1,1 @@
-Warning: Variable b is not initialized
-Warning: Variable c is not initialized
-Warning: Variable f is not initialized
-Warning: Variable s is not initialized
-Warning: Variable x is not initialized
+Warning: Variable z is not initialized

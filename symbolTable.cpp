@@ -2,6 +2,13 @@
 #include "symbolTable.h"
 #include <string.h>
 #include <fstream>
+#include <iostream>  
+#include<sstream>
+#include <iterator>
+
+using std::cout; using std::endl;
+using std::string; using std::hex;
+using std::stringstream;
 
 void print_test(int type)
 {
@@ -12,8 +19,29 @@ void initialize()
 {
     symbolTable = fopen("Symbol Table.txt", "w");
     errors = fopen("Semantic Errors.txt", "w");
+    quad = fopen("Quad.txt", "w");
     scopesParents[0] = -1;
 }
+
+// Triples
+void triples(string opType, string src, string dest){
+    ofstream outfile;
+    outfile.open("Quad.txt", std::ios::app);
+    outfile<<opType<<" \t"<<src<<" \t"<<dest<<"\n";
+}
+
+// Quadruples
+void quadruples(string opType, string src1, string src2, string dest){
+    ofstream outfile;
+    outfile.open("Quad.txt", std::ios::app);
+    outfile<<opType<<" \t"<<src1<<" \t"<<src2<<" \t"<<dest<<"\n";
+}
+
+// generate a new register 
+string getRegister(){
+  return "R" + to_string(reg++);
+}
+
 
 bool checkType(int type1, int type2, struct value Value)
 {
@@ -31,6 +59,50 @@ bool checkType(int type1, int type2, struct value Value)
         return false;
     }
 }
+
+string getValue(struct value Value)
+{
+    if (Value.type == INT_VAL)
+        return to_string(Value.intValue);
+    else if (Value.type == FLOAT_VAL)
+        return to_string(Value.floatValue);
+    else if (Value.type == CHAR_VAL)
+        return to_string((Value.charValue));
+    else if (Value.type == STRING_VAL)
+        return Value.stringValue;
+    else if (Value.type == BOOL_VAL)
+        return Value.boolValue ? "true" : "false";
+    else
+        return "";
+}
+
+string stringToHex(string s1){
+    stringstream ss;
+    string s2 = s1.substr(1, s1.size() - 2);
+    for (const auto &item : s2) {
+        ss << hex << int(item);
+    }
+    return ss.str();
+}
+
+string getRegValue(struct value Value)
+{
+
+    if (Value.type == INT_VAL)
+        return to_string(Value.intValue);
+    else if (Value.type == FLOAT_VAL)
+        return to_string(Value.floatValue);
+    else if (Value.type == CHAR_VAL)
+        return to_string((int)Value.charValue);
+    else if (Value.type == STRING_VAL)
+        return stringToHex( Value.stringValue);
+    else if (Value.type == BOOL_VAL)
+        return Value.boolValue ? "1" : "0";
+    else
+        return "";
+}
+
+
 
 pair<bool, int> checkAlreadyDeclared(char *VarName, int scope)
 {
@@ -66,6 +138,9 @@ int createEntry(struct value Value, bool isConst, int declarationType,
             newNode->line = line;
             newNode->scope = currentScope;
             symbols[make_pair((string)VarName, currentScope)] = newNode;
+            string reg = getRegister();
+            triples("MOV", getRegValue(Value), reg );
+            triples("MOV", reg, VarName);
             printSymbol(newNode);
             return 0;
         }
@@ -109,6 +184,10 @@ int updateEntry(struct value Value, int line)
                 it->second->isUsed = true;
                 it->second->line = line;
                 printSymbol(it->second);
+                string reg = getRegister();
+                triples("MOV", getRegValue(Value), reg );
+                triples("MOV", reg, VarName);
+
                 return 0;
             }
             else
@@ -136,21 +215,6 @@ int updateEntry(struct value Value, int line)
     }
 }
 
-string getValue(struct value Value)
-{
-    if (Value.type == INT_VAL)
-        return to_string(Value.intValue);
-    else if (Value.type == FLOAT_VAL)
-        return to_string(Value.floatValue);
-    else if (Value.type == CHAR_VAL)
-        return to_string(Value.charValue);
-    else if (Value.type == STRING_VAL)
-        return Value.stringValue;
-    else if (Value.type == BOOL_VAL)
-        return Value.boolValue ? "true" : "false";
-    else
-        return "";
-}
 
 void printSymbol(symbolTableEntry *symbol)
 {
@@ -210,21 +274,3 @@ void closeBracket()
     parent = currentScope;
 }
 
-// Triples
-void triples(string opType, string src, char* dest){
-    ofstream outfile;
-    outfile.open("Quad.txt", std::ios::app);
-    outfile<<opType<<" \t"<<src<<" \t"<<dest<<"\n";
-}
-
-// Quadruples
-void quadruples(string opType, string src1, string src2, char* dest){
-    ofstream outfile;
-    outfile.open("Quad.txt", std::ios::app);
-    outfile<<opType<<" \t"<<src1<<" \t"<<src2<<" \t"<<dest<<"\n";
-}
-
-// generate a new register 
-string getRegister(){
-  return "R" + to_string(reg++);
-}

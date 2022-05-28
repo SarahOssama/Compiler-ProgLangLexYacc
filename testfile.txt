@@ -1,7 +1,6 @@
-bool b;
-int x;
-float f;
-char c;
-string s;
+int x = 5 ;
+float f = 1.2;
+string s = "hello";
+char z ;
 <<EOF>>
 

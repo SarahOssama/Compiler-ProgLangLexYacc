@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.txt": "cmake",
+        "utility": "cpp",
+        "string": "cpp"
+    }
+}

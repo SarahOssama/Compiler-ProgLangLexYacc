@@ -245,6 +245,11 @@ assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
 																Value.charValue = $4.charValue;
 																Value.boolValue = $4.boolValue;														
 																Value.floatValue = $4.floatValue;
+																
+																getRegister();
+																printf ("register is %s", getRegister());
+
+																// triples("MOV", )
 
 																createEntry(Value, false, $1, true,
 																false, yylineno);

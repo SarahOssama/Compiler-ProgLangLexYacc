@@ -1,1 +1,1 @@
-SYNTAX ERROR ON LINE 1 : syntax error 
+SYNTAX ERROR ON LINE 2 : syntax error 
