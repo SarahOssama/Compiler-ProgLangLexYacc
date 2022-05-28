@@ -1,6 +1,5 @@
-bool b = false;
-bool x = true;
-float f = 1.2;
-string s = "Hello";
+string s = 1;
+int x = 7;
+bool b = 'd';
 <<EOF>>
 

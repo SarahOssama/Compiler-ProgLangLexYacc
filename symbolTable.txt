@@ -1,5 +1,2 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line
-b         0           BOOL     false      1         0         1
-f         0           FLOAT     1.200000      1         0         3
-s         0           STRING     "Hello"      1         0         4
-x         0           BOOL     true      1         0         2
+x         0           INT     7      1         0         2

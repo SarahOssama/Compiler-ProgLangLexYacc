@@ -1,0 +1,2 @@
+Error: Type mismatch in line 1
+Error: Type mismatch in line 3

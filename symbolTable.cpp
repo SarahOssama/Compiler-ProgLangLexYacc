@@ -37,22 +37,35 @@ int createEntry(struct value Value, bool isConst, int declarationType,
 {
     char *VarName = Value.varName;
 
+    // int is line number
     pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
     if (!alreadyDeclared.first)
     {
-        symbolTableEntry *newNode = new symbolTableEntry();
-        newNode->name = VarName;
-        newNode->isConst = isConst;
-        newNode->type = declarationType;
-        newNode->Value = Value;
-        newNode->isInit = isInit;
-        newNode->isUsed = isUsed;
-        newNode->line = line;
-        string temp = VarName;
-        symbols[temp] = newNode;
 
-        printSymbol(newNode);
-        return 0;
+        if (checkType(declarationType, Value.type))
+        {
+
+            symbolTableEntry *newNode = new symbolTableEntry();
+            newNode->name = VarName;
+            newNode->isConst = isConst;
+            newNode->type = declarationType;
+            newNode->Value = Value;
+            newNode->isInit = isInit;
+            newNode->isUsed = isUsed;
+            newNode->line = line;
+            string temp = VarName;
+            symbols[temp] = newNode;
+
+            printSymbol(newNode);
+            return 0;
+        }
+        else
+        {
+            ofstream outfile;
+            outfile.open("errors.txt", std::ios::app);
+            outfile << "Error: Type mismatch in line " << line << endl;
+            return 1;
+        }
     }
     else
     {
