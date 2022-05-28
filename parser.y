@@ -51,6 +51,7 @@
 %type<stringValue> IDENTIFIER
 %type<intValue> type
 %type<lexemeValue> value
+%type<lexemeValue> expression
 
 
 // Token for if then else 
@@ -151,28 +152,52 @@ for_statement:
 	;
 
  // Values
-value: 	IDENTIFIER 
-		| INT_NUMBER 
-		| FLOAT_NUMBER
-		| STRING
-		| TRUE 
-		| FALSE;
+value: 	IDENTIFIER 		{ 
+							symbolTableEntry* entry = returnVal($1);
+							
+							if(entry !=nullptr)
+							{
+								if(entry->type == INT){
+									$$.intValue = entry->intValue;
+								}
+								else if(entry->type == FLOAT){
+									$$.floatValue = entry->floatValue;
+								}
+								else if(entry->type == STRING){
+									$$.stringValue = entry->stringValue;
+								}
+								else if(entry->type == CHAR){
+									$$.charValue = entry->charValue;
+								}
+								else if(entry->type == BOOL)
+									$$.boolValue = entry->boolValue;
+								
+							}
+							
+						}
+		| INT_NUMBER   {$$.intValue=$1.intValue;}
+		| FLOAT_NUMBER {$$.floatValue=$1.floatValue;}
+		| CHAR			{$$.charValue=$1.charValue;}
+		| STRING		{$$.stringValue=$1.stringValue;}
+		| TRUE 			{$$.boolValue=$1.boolValue;}
+		| FALSE		{$$.boolValue=$1.boolValue;}
 ;
 
 //  Mathematical Expressions
-expression_statement: expression SEMICOLON;
+expression_statement: expression SEMICOLON ;
 
 expression:
 	expression PLUS expression {
-									// printf("Expression: %d + %d\n", $1, $3);
-									// $$ = $1 + $3;
-									// printf("$$: %d\n", $$);
+									//  printf("Expression: %d + %d\n", $1, $3);
+									if($1.type == INT_VAL && $3.type == INT_VAL)
+									 	$$.intValue = $1.intValue + $3.intValue;
+									// printf("hello: \n" );
 								} 
 	|
 	expression MINUS expression |
 	expression MULT expression |
 	expression DIV expression |
-	value |
+	value { $$.type= $1.type;  $$.intValue = $1.intValue;		} |
 
 	expression PLUS_EQ expression |
 	expression MINUS_EQ expression |
@@ -236,7 +261,7 @@ type: 			INT
 					{ 
 						$$= BOOL_VAL;
 					};
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
+assignment_statement: 	type IDENTIFIER EQUAL expression SEMICOLON {
 																struct value Value;
 																Value.type = $4.type;
 																Value.varName = $2;
@@ -250,7 +275,7 @@ assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
 																createEntry(Value, false, $1, true,
 																false, yylineno);
 															};
-						| IDENTIFIER EQUAL value SEMICOLON 	{	
+						| IDENTIFIER EQUAL expression SEMICOLON 	{	
 																struct value Value;
 																Value.type = $3.type;
 																Value.varName = $1;
@@ -286,7 +311,7 @@ function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
 						| VOID IDENTIFIER OPENBRACKET CLOSEDBRACKET;
 parameters: 			parameters COMMA single_parameter | single_parameter ;
 single_parameter: 		type IDENTIFIER | type IDENTIFIER EQUAL constant ;
-constant: 				INT_NUMBER | FLOAT_NUMBER | STRING;
+constant: 				INT_NUMBER | FLOAT_NUMBER | STRING | CHAR;
 function_call: 			IDENTIFIER OPENBRACKET call_parameters CLOSEDBRACKET SEMICOLON ;
 call_parameters:		call_parameter |;
 call_parameter:			call_parameter COMMA value | value ;

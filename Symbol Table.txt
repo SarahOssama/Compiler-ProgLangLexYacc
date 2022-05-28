@@ -1,5 +1,0 @@
-Var Name   Is Const   Type   Value   Is Init   Is Used   Line  Scope
-f         0           FLOAT     1.200000      1         0         2    0
-s         0           STRING     "hello"      1         0         3    0
-x         0           INT     5      1         0         1    0
-z         0           CHAR     101      0         0         4    0

@@ -9,23 +9,23 @@ using namespace std;
 // #define STRING_VAL 4
 // #define BOOL_VAL 5
 
-FILE* errors;
-FILE* symbolTable;
-FILE* quad;
-
+FILE *errors;
+FILE *symbolTable;
+FILE *quad;
 
 struct value
 {
     int intValue;
     char charValue;
-    char* stringValue;
+    char *stringValue;
     float floatValue;
     bool boolValue;
-    char* varName;
+    char *varName;
     int type;
 };
 
-enum type {
+enum type
+{
     INT_VAL,
     FLOAT_VAL,
     CHAR_VAL,
@@ -48,16 +48,16 @@ public:
     int scope;
 };
 
-
 int scopesParents[100];
 int parent = 0;
 int currentScope = 0;
 int lastScope = 0;
-//String is var name
-//int is scope
+int val = 0;
+// String is var name
+// int is scope
 
 int reg = 0;
-map<pair<string, int>, symbolTableEntry*> symbols;
+map<pair<string, int>, symbolTableEntry *> symbols;
 
 void initialize();
 
@@ -77,7 +77,4 @@ string getRegister();
 
 string getRegValue(struct value Value);
 string stringToHex(string s1);
-
-
-
-
+symbolTableEntry *returnVal(char *VarName);

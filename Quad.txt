@@ -1,8 +1,0 @@
-MOV 	5 	R2
-MOV 	R2 	x
-MOV 	1.200000 	R5
-MOV 	R5 	f
-MOV 	68656c6c6f 	R8
-MOV 	R8 	s
-MOV 	101 	R9
-MOV 	R9 	z
