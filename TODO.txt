@@ -1,6 +1,2 @@
 - Quadruples
-- Type conversion	(float to int)	-Optional
 - GUI					-Optional
---------------------------------------
-
-float f = 1;
