@@ -1,5 +1,7 @@
 int x;
-int y;
-int x;
+string s;
+bool b;
+float f;
+bool b;
 <<EOF>>
 

@@ -15,10 +15,7 @@
 
 %union {
     int intValue;
-    // float floatValue;       /* float value */
-    // char charValue;       	/* character value */
-    // char* stringValue; 		/* string value */
-		
+	char* stringValue;
 	struct lexeme{
 		int type;
 		char* name;
@@ -50,8 +47,9 @@
 %token CONST
 %token IDENTIFIER
 %token NUMBER
-%type <lexemeValue> IDENTIFIER
+%type<stringValue> IDENTIFIER
 %type<intValue> type
+%type<lexemeValue> value
 
 
 // Token for if then else 
@@ -195,22 +193,36 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {			
-													createEntry($2.name, false, $1,
-														-1, false, false, yylineno);
+var_declaration: 		type IDENTIFIER SEMICOLON {		
+													printf("Type at parser: %d\n", $1);	
+													createEntry($2, false, $1,
+														-1, false,$1 , false, yylineno);
 												}; 
-type: 			INT {
+type: 			INT 
+					{
 						$$ = INT_VAL;
-					} |
-				FLOAT{type_val= FLOAT_VAL;} |
-				CHAR{type_val=CHAR_VAL;} |
-				STRING {type_val= STRING_VAL;}|
-				BOOL{type_val= BOOL_VAL;};
+					}; 
+				|FLOAT
+					{
+						$$ = FLOAT_VAL;
+					}; 
+				|CHAR
+					{
+						$$=CHAR_VAL;
+					}; 
+				|STRING
+					{
+						$$= STRING_VAL;
+					};
+				|BOOL
+					{ 
+						$$= BOOL_VAL;
+					};
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {		
-															//checkType($1, $4);
+															//checkType($1, $4.type);
 															//printf("Type at parser: %d\n", $1);
-															// createEntry($2, false, type_val, $4, true, 
-															// false, yylineno);
+															//createEntry($2, false, type_val, $4, true, 
+															//false, yylineno);
 															};
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;

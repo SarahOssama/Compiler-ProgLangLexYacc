@@ -85,8 +85,7 @@ enum type {
 
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           {   
-                                    yylval.lexemeValue.name = strdup(yytext);
-                                    printf("Identifier at lexer: %s\n", yytext);                     
+                                    yylval.stringValue = strdup(yytext);                                       
                                     return IDENTIFIER;
                                 }
 ["][a-zA-Z0-9]*["]              {   

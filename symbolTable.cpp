@@ -34,7 +34,8 @@ pair<bool, int> checkAlreadyDeclared(char *VarName)
     return make_pair(false, 0);
 }
 
-int createEntry(char *VarName, bool isConst, int type, int Value, bool isInit, bool isUsed, int line)
+int createEntry(char *VarName, bool isConst, int declarationType, int Value, 
+bool isInit, int initializationType ,bool isUsed, int line)
 {
     pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
     if(!alreadyDeclared.first)
@@ -42,7 +43,7 @@ int createEntry(char *VarName, bool isConst, int type, int Value, bool isInit, b
         symbolTableEntry *newNode = new symbolTableEntry();
         newNode->name = VarName;
         newNode->isConst = isConst;
-        newNode->type = type;
+        newNode->type = declarationType;
         newNode->Value = Value;
         newNode->isInit = isInit;
         newNode->isUsed = isUsed;
