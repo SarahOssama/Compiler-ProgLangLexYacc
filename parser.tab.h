@@ -100,7 +100,7 @@ typedef union YYSTYPE
     int intValue;        	/* integer value */
     float floatValue;       /* float value */
     char charValue;       	/* character value */
-    char* stringValue; 		/* string value */     
+    char* stringValue; 		/* string value */
 
 
 

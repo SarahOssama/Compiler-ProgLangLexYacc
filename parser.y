@@ -22,7 +22,7 @@
     int intValue;        	/* integer value */
     float floatValue;       /* float value */
     char charValue;       	/* character value */
-    char* stringValue; 		/* string value */     
+    char* stringValue; 		/* string value */
 };
 
 //Mathermatical Expressions
@@ -49,6 +49,7 @@
 %type <stringValue> IDENTIFIER
 %type <intValue> NUMBER
 %type <intValue> expression
+
 
 
 
@@ -191,14 +192,17 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {createEntry($2, false, type_val, -1, 0, 0, yylineno);};
+var_declaration: 		type IDENTIFIER SEMICOLON {								
+													printf("Identifier at Var: %s\n",$2);
+													createEntry($2, false, type_val, -1, 0, 0, yylineno);
+												}; 
 type: 			INT {type_val = INT_VAL;
 					} |
 				FLOAT{type_val= FLOAT_VAL;} |
 				CHAR{type_val=CHAR_VAL;} |
 				STRING {type_val= STRING_VAL;}|
 				BOOL{type_val= BOOL_VAL;};
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("IDENTIFIER AT Assignment Statement %s\n",$2);}
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 

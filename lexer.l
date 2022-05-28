@@ -1,6 +1,6 @@
 %{
 
-
+#include<string.h>
 #include<stdio.h>
 int yylineno = 1; //Initialize
 void yyerror(char *s);
@@ -70,10 +70,16 @@ void yyerror(char *s);
 "for"                           return FOR;
 
 
+    /*Stop Characters*/
+"\n"                            {yylineno += 1;}
+[\t\r]+                         ;
+";"								{yylval.stringValue = ""; 
+                                    return SEMICOLON;}
+
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           {   
-                                    yylval.stringValue = yytext;
-                                    
+                                    yylval.stringValue = strdup(yytext);
+                                    printf("Identifier at lexer: %s\n", yytext);                     
                                     return IDENTIFIER;
                                 }
 
@@ -85,10 +91,7 @@ void yyerror(char *s);
     /*Assignment Operator*/
 "="				                return EQUAL;
 
-    /*Stop Characters*/
-"\n"                            {yylineno += 1;}
-[\t\r]+                         ;
-";"                             return SEMICOLON;
+
 
 %%
 

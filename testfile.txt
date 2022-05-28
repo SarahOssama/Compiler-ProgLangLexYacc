@@ -1,4 +1,2 @@
-int x;
-string y;
-bool q;
+int rt;
 <<EOF>>
