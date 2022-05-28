@@ -210,3 +210,22 @@ void closeBracket()
     currentScope = scopesParents[currentScope];
     parent = currentScope;
 }
+
+// Triples
+void triples(string opType, string src, char* dest){
+    ofstream outfile;
+    outfile.open("Quad.txt", std::ios::app);
+    outfile<<opType<<" \t"<<src<<" \t"<<dest<<"\n";
+}
+
+// Quadruples
+void quadruples(string opType, string src1, string src2, char* dest){
+    ofstream outfile;
+    outfile.open("Quad.txt", std::ios::app);
+    outfile<<opType<<" \t"<<src1<<" \t"<<src2<<" \t"<<dest<<"\n";
+}
+
+// generate a new register 
+string getRegister(){
+  return "R" + to_string(reg++);
+}

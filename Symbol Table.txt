@@ -1,2 +1,1 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line  Scope
-f         0           FLOAT     4      1         0         1    0

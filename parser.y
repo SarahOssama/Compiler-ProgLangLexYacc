@@ -214,6 +214,7 @@ var_declaration: 		type IDENTIFIER SEMICOLON {
 													else if(Value.type = FLOAT_VAL)
 														Value.floatValue = -1.0;
 
+													printf("typee = %d" , $1);
 													createEntry(Value, false, $1, false, false, yylineno);
 												}; 
 type: 			INT 

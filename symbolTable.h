@@ -54,6 +54,8 @@ int currentScope = 0;
 int lastScope = 0;
 //String is var name
 //int is scope
+
+int reg = 0;
 map<pair<string, int>, symbolTableEntry*> symbols;
 
 void initialize();
@@ -65,3 +67,8 @@ string getType(int type);
 int createEntry(char *VarName, bool isConst, int type, int Value, bool isInit, bool isUsed, int line);
 
 void printSymbol(symbolTableEntry *symbol);
+
+void triples(string opType, string src, char* dest);
+
+void quadruples(string opType, string src1, string src2, char* dest);
+
