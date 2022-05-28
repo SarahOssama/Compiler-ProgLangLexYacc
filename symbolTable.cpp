@@ -12,6 +12,7 @@ void initialize()
 {
     symbolTable = fopen("Symbol Table.txt", "w");
     errors = fopen("Semantic Errors.txt", "w");
+    scopesParents[0] = -1;
 }
 
 bool checkType(int type1, int type2)
@@ -22,14 +23,17 @@ bool checkType(int type1, int type2)
         return false;
 }
 
-pair<bool, int> checkAlreadyDeclared(char *VarName)
+pair<bool, int> checkAlreadyDeclared(char *VarName, int scope)
 {
-    map<string, symbolTableEntry *>::iterator it = symbols.find(VarName);
-    if (it != symbols.end())
+    pair<string, int> key(VarName, scope);
+    if (symbols.find(key) != symbols.end())
     {
-        return make_pair(true, it->second->line);
+        return make_pair(true, symbols[key]->line);
     }
-    return make_pair(false, 0);
+    else
+    {
+        return make_pair(false, -1);
+    }
 }
 
 int createEntry(struct value Value, bool isConst, int declarationType,
@@ -38,7 +42,7 @@ int createEntry(struct value Value, bool isConst, int declarationType,
     char *VarName = Value.varName;
 
     // int is line number
-    pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
+    pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName, currentScope);
     if (!alreadyDeclared.first)
     {
 
@@ -52,10 +56,8 @@ int createEntry(struct value Value, bool isConst, int declarationType,
             newNode->isInit = isInit;
             newNode->isUsed = isUsed;
             newNode->line = line;
-            string temp = VarName;
-            symbols[temp] = newNode;
-
-        
+            newNode->scope = currentScope;
+            symbols[make_pair((string)VarName, currentScope)] = newNode;
             printSymbol(newNode);
             return 0;
         }
@@ -79,8 +81,16 @@ int createEntry(struct value Value, bool isConst, int declarationType,
 int updateEntry(struct value Value, int line)
 {
     char *VarName = Value.varName;
-    map<string, symbolTableEntry *>::iterator it = symbols.find(VarName);
-    if (it != symbols.end())
+    int scope = currentScope;
+    pair<string, int> key(VarName, scope);
+    map<pair<string, int>, symbolTableEntry *>::iterator it = symbols.find(key);
+    while (scope > -1 && it == symbols.end())
+    {
+        scope = scopesParents[scope];
+        key = make_pair(VarName, scope);
+        it = symbols.find(key);
+    }
+    if (scope > -1)
     {
         if (checkType(it->second->type, Value.type))
         {
@@ -155,25 +165,39 @@ string getType(int type)
                                          : "";
 }
 
-void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
+void writeSymbolTable(map<pair<string, int>, symbolTableEntry *> symbolsMap)
 {
 
     ofstream outfile;
     outfile.open("Symbol Table.txt", std::ios::app);
-    outfile << "Var Name   Is Const   Type   Value   Is Init   Is Used   Line\n";
+    outfile << "Var Name   Is Const   Type   Value   Is Init   Is Used   Line  Scope\n";
     for (auto it = symbolsMap.begin(); it != symbolsMap.end(); ++it)
     {
 
-        if(!it->second->isInit)
+        if (!it->second->isInit)
         {
             ofstream outfile;
-                outfile.open("Semantic Errors.txt", std::ios::app);
-                outfile << "Warning: Variable " << it->first <<" is not initialized" << endl;
+            outfile.open("Semantic Errors.txt", std::ios::app);
+            outfile << "Warning: Variable " << it->first.first << " is not initialized" << endl;
         }
 
-
-        outfile << it->first << "         " << it->second->isConst << "           "
-                << getType(it->second->type) << "     " << getValue(it->second->Value) << "      " << it->second->isInit << "         " << it->second->isUsed << "         " << it->second->line << endl;
+        outfile << it->first.first << "         " << it->second->isConst << "           "
+                << getType(it->second->type) << "     " << getValue(it->second->Value)
+                << "      " << it->second->isInit << "         " << it->second->isUsed << "         " << it->second->line << "    " << it->second->scope << endl;
     }
     outfile.close();
+}
+
+void openBracket()
+{
+    lastScope++;
+    currentScope = lastScope;
+    scopesParents[currentScope] = parent;
+    parent = currentScope;
+}
+
+void closeBracket()
+{
+    currentScope = scopesParents[currentScope];
+    parent = currentScope;
 }

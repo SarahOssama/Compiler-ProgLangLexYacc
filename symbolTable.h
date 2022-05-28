@@ -46,9 +46,19 @@ public:
     int line;
     int scope;
 };
-map<string, symbolTableEntry*> symbols;
+
+
+int scopesParents[100];
+int parent = 0;
+int currentScope = 0;
+int lastScope = 0;
+//String is var name
+//int is scope
+map<pair<string, int>, symbolTableEntry*> symbols;
 
 void initialize();
+
+void openBracket();
 
 string getType(int type);
 

@@ -119,7 +119,7 @@ statement :
 	| for_statement
 	| function							{printf("Function \n");}
 	| function_call						{printf("Function Call \n");}
-	| OPENCURL statements CLOSEDCURL
+	| OPENCURL {openBracket();} statements CLOSEDCURL {closeBracket();}
 	| RETURN return_value SEMICOLON
 	;
 
@@ -131,23 +131,23 @@ block_statement :
 
 //if statment
 if_statement: 
-		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL  {printf("If then statement\n");}
-		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL {printf("If then else statement\n");}
+		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}  {printf("If then statement\n");}
+		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} ELSE OPENCURL {openBracket();} statement CLOSEDCURL {printf("If then else statement\n");}
 	;
 //while statment
 while_statement:
-		WHILE OPENBRACKET expression CLOSEDBRACKET OPENCURL statement CLOSEDCURL   {printf("while statment\n");}
+		WHILE OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}  {printf("while statment\n");}
 		| WHILE
 		;
 
 // do while statment
 do_while_statement:
-	DO OPENCURL statement CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
+	DO OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
 	;
 
 // for statment
 for_statement:
-	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL statement CLOSEDCURL {printf("for loop\n");}
+	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} {printf("for loop\n");}
 	;
 
  // Values
