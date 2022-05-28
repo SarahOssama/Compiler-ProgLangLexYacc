@@ -1,1 +1,2 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line
+x         0           INT     -1      0         0         1

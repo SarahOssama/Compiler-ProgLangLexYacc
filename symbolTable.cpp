@@ -55,6 +55,13 @@ int createEntry(struct value Value, bool isConst, int declarationType,
             string temp = VarName;
             symbols[temp] = newNode;
 
+            if (!isInit)
+            {
+                ofstream outfile;
+                outfile.open("errors.txt", std::ios::app);
+                outfile << "Warning: Variable " << VarName <<" is not initialized" << endl;
+            }
+
             printSymbol(newNode);
             return 0;
         }
@@ -96,8 +103,7 @@ int updateEntry(struct value Value, int line)
             {
                 ofstream outfile;
                 outfile.open("errors.txt", std::ios::app);
-                outfile << "Error: Variable " << VarName << " is declared constant at line " << 
-                it->second->line << endl;
+                outfile << "Error: Variable " << VarName << " is declared constant at line " << it->second->line << endl;
                 return 1;
             }
         }
