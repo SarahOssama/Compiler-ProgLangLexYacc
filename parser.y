@@ -287,7 +287,37 @@ expression:
 								}
 	
 	|
-	expression DIV expression |
+	expression DIV expression 
+								{
+									printf("DIVISION EXPRESSION\n");
+									printf("TYPES: %d %d\n", $1.type, $3.type);
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,
+										$1.intValue / $3.intValue);
+										$$.intValue = $1.intValue / $3.intValue;
+										$$.type = INT_VAL;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.floatValue = $1.floatValue / $3.floatValue;
+										$$.type = FLOAT_VAL;
+									}
+									if ($1.type == INT_VAL && $3.type == FLOAT_VAL)
+									{
+										// printf("1: %d, 3: %f, $$ = %f\n", $1.intValue, $3.floatValue,
+										// $1.intValue + $3.floatValue);
+										$$.floatValue = $1.intValue / $3.floatValue;
+										$$.type = FLOAT_VAL;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == INT_VAL)
+									{
+										$$.floatValue = $1.floatValue / $3.intValue;
+										$$.type = FLOAT_VAL;
+									}
+								}
+	
+	|
 	value { 
 				printf("AT VALUE: Type = %d intValue = %d\n",$1.type, $1.intValue);
 				$$.type= $1.type;  $$.intValue = $1.intValue;		

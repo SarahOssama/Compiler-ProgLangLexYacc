@@ -1,5 +1,6 @@
-int x = 3;
+int x = 2;
 int y = 8;
-int m = 1;
-int z = x + y + m;
+int t = 2;
+int z = y/x+ y/x/t;
+
 <<EOF>>
