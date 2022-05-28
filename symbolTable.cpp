@@ -15,12 +15,21 @@ void initialize()
     scopesParents[0] = -1;
 }
 
-bool checkType(int type1, int type2)
+bool checkType(int type1, int type2, struct value Value)
 {
     if (type1 == type2)
         return true;
     else
+    {
+
+        if (type1 == FLOAT_VAL && type2 == INT_VAL)
+        {
+            Value.floatValue = Value.intValue;
+            return true;
+        }
+
         return false;
+    }
 }
 
 pair<bool, int> checkAlreadyDeclared(char *VarName, int scope)
@@ -46,7 +55,7 @@ int createEntry(struct value Value, bool isConst, int declarationType,
     if (!alreadyDeclared.first)
     {
 
-        if (checkType(declarationType, Value.type))
+        if (checkType(declarationType, Value.type, Value))
         {
             symbolTableEntry *newNode = new symbolTableEntry();
             newNode->name = VarName;
@@ -92,7 +101,7 @@ int updateEntry(struct value Value, int line)
     }
     if (scope > -1)
     {
-        if (checkType(it->second->type, Value.type))
+        if (checkType(it->second->type, Value.type, Value))
         {
             if (!it->second->isConst)
             {

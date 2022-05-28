@@ -1,2 +1,0 @@
-Error: Variable x not declared at line 3
-Error: Variable y already declared at line 2

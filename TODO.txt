@@ -1,9 +1,6 @@
-- Scope
 - Quadruples
 - Type conversion	(float to int)	-Optional
 - GUI					-Optional
-- Print which syntax error
 --------------------------------------
 
-currentScope = 0;
-parents[currentScope]
+float f = 1;
