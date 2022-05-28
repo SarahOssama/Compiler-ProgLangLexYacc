@@ -1,3 +1,7 @@
-bool f;
+bool b;
+int x;
+float f;
+char c;
+string s;
 <<EOF>>
 

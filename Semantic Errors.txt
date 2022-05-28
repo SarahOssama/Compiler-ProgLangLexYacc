@@ -1,1 +1,5 @@
-Error: Type mismatch in line 1
+Warning: Variable b is not initialized
+Warning: Variable c is not initialized
+Warning: Variable f is not initialized
+Warning: Variable s is not initialized
+Warning: Variable x is not initialized

@@ -49,7 +49,6 @@ int createEntry(struct value Value, bool isConst, int declarationType,
                 bool isInit, bool isUsed, int line)
 {
     char *VarName = Value.varName;
-
     // int is line number
     pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName, currentScope);
     if (!alreadyDeclared.first)
@@ -168,9 +167,9 @@ void printSymbol(symbolTableEntry *symbol)
 string getType(int type)
 {
     return type == 0 ? "INT" : type == 1 ? "FLOAT"
-                           : type == 2   ? "CHAR"
-                           : type == 3   ? "STRING"
-                           : type == 4   ? "BOOL"
+                            : type == 2   ? "CHAR"
+                            : type == 3   ? "STRING"
+                            : type == 4   ? "BOOL"
                                          : "";
 }
 

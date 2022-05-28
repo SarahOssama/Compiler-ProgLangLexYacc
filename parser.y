@@ -205,16 +205,15 @@ var_declaration: 		type IDENTIFIER SEMICOLON {
 													Value.varName = $2;
 													if(Value.type == INT_VAL)
 														Value.intValue = -1;
-													else if(Value.type = STRING_VAL)
+													else if(Value.type == STRING_VAL)
 														Value.stringValue = (char*)calloc(1, sizeof(char));
-													else if(Value.type = CHAR_VAL)
+													else if(Value.type == CHAR_VAL)
 														Value.charValue = 'e';
-													else if(Value.type = BOOL_VAL)
+													else if(Value.type == BOOL_VAL)
 														Value.boolValue = false;
-													else if(Value.type = FLOAT_VAL)
+													else if(Value.type == FLOAT_VAL)
 														Value.floatValue = -1.0;
-
-													printf("typee = %d" , $1);
+													
 													createEntry(Value, false, $1, false, false, yylineno);
 												}; 
 type: 			INT 
