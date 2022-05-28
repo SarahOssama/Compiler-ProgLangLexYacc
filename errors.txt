@@ -1,1 +1,0 @@
-Warning: Variable x is not initialized

@@ -2,9 +2,9 @@
 
 #include<string.h>
 #include<stdio.h>
+#include "parser.tab.h"
 int yylineno = 1; //Initialize
 void yyerror(char *s);
-#include "parser.tab.h"
 
 enum type {
     INT_VAL,
@@ -132,6 +132,9 @@ int yywrap(void)
 }
 
 void yyerror(char *s) {
+   
+    FILE *errorsFile = fopen("Syntax Errors.txt", "w");
     fprintf(stderr, "\n ERROR ON LINE %d :\n %s \n", yylineno, s);
+    fprintf(errorsFile, "SYNTAX ERROR ON LINE %d : %s \n", yylineno-1, s);
     exit(0);
 }

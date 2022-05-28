@@ -1,3 +1,16 @@
-
-- GUI
+- Quadruples
+- Scope
+- Type conversion	(float to int)	-Optional
+- GUI					-Optional
 - Print which syntax error
+------------------------------------------------
+for(int i=0;i<5;i++)
+{
+//Code
+}
+
+LABEL: l1
+MOV R1, 0
+//Code
+INC R1
+JNE R1, 5

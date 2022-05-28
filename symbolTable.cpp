@@ -10,8 +10,8 @@ void print_test(int type)
 
 void initialize()
 {
-    symbolTable = fopen("symbolTable.txt", "w");
-    errors = fopen("errors.txt", "w");
+    symbolTable = fopen("Symbol Table.txt", "w");
+    errors = fopen("Semantic Errors.txt", "w");
 }
 
 bool checkType(int type1, int type2)
@@ -62,7 +62,7 @@ int createEntry(struct value Value, bool isConst, int declarationType,
         else
         {
             ofstream outfile;
-            outfile.open("errors.txt", std::ios::app);
+            outfile.open("Semantic Errors.txt", std::ios::app);
             outfile << "Error: Type mismatch in line " << line << endl;
             return 1;
         }
@@ -70,7 +70,7 @@ int createEntry(struct value Value, bool isConst, int declarationType,
     else
     {
         ofstream outfile;
-        outfile.open("errors.txt", std::ios::app);
+        outfile.open("Semantic Errors.txt", std::ios::app);
         outfile << "Error: Variable " << VarName << " already declared at line " << alreadyDeclared.second << endl;
         return 1;
     }
@@ -96,7 +96,7 @@ int updateEntry(struct value Value, int line)
             else
             {
                 ofstream outfile;
-                outfile.open("errors.txt", std::ios::app);
+                outfile.open("Semantic Errors.txt", std::ios::app);
                 outfile << "Error: Variable " << VarName << " is declared constant at line " << it->second->line << endl;
                 return 1;
             }
@@ -104,7 +104,7 @@ int updateEntry(struct value Value, int line)
         else
         {
             ofstream outfile;
-            outfile.open("errors.txt", std::ios::app);
+            outfile.open("Semantic Errors.txt", std::ios::app);
             outfile << "Error: Type mismatch in line " << line << endl;
             return 1;
         }
@@ -112,7 +112,7 @@ int updateEntry(struct value Value, int line)
     else
     {
         ofstream outfile;
-        outfile.open("errors.txt", std::ios::app);
+        outfile.open("Semantic Errors.txt", std::ios::app);
         outfile << "Error: Variable " << VarName << " not declared at line " << line << endl;
         return 1;
     }
@@ -159,7 +159,7 @@ void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
 {
 
     ofstream outfile;
-    outfile.open("symbolTable.txt", std::ios::app);
+    outfile.open("Symbol Table.txt", std::ios::app);
     outfile << "Var Name   Is Const   Type   Value   Is Init   Is Used   Line\n";
     for (auto it = symbolsMap.begin(); it != symbolsMap.end(); ++it)
     {
@@ -167,7 +167,7 @@ void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
         if(!it->second->isInit)
         {
             ofstream outfile;
-                outfile.open("errors.txt", std::ios::app);
+                outfile.open("Semantic Errors.txt", std::ios::app);
                 outfile << "Warning: Variable " << it->first <<" is not initialized" << endl;
         }
 
