@@ -1,2 +1,5 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line  Scope
-f         0           FLOAT     3.400000      1         0         1    0
+m         0           INT     1      1         0         3    0
+x         0           INT     3      1         0         1    0
+y         0           INT     8      1         0         2    0
+z         0           INT     12      1         0         4    0

@@ -159,29 +159,41 @@ for_statement:
 
  // Values
 value: 	IDENTIFIER 		{ 
-							// symbolTableEntry* entry = returnVal($1);
-							
-							// if(entry !=nullptr)
-							// {
-							// 	if(entry->type == INT){
-							// 		$$.intValue = entry->intValue;
-							// 	}
-							// 	else if(entry->type == FLOAT){
-							// 		$$.floatValue = entry->floatValue;
-							// 	}
-							// 	else if(entry->type == STRING){
-							// 		$$.stringValue = entry->stringValue;
-							// 	}
-							// 	else if(entry->type == CHAR){
-							// 		$$.charValue = entry->charValue;
-							// 	}
-							// 	else if(entry->type == BOOL)
-							// 		$$.boolValue = entry->boolValue;
+							symbolTableEntry* entry = returnVal($1);
+							struct value tempValue = entry->Value;
+							if(entry != nullptr)
+							{
 								
-							// }
+								if(tempValue.type == INT_VAL)
+								{
+									$$.intValue = tempValue.intValue;
+									$$.type = INT_VAL;
+								}
+								else if(tempValue.type == FLOAT_VAL)
+								{
+									$$.floatValue = tempValue.floatValue;
+									$$.type = FLOAT_VAL;
+								}
+								else if(tempValue.type == STRING_VAL)
+								{
+									$$.stringValue = tempValue.stringValue;
+									$$.type = STRING_VAL;
+								}
+								else if(tempValue.type == CHAR_VAL)
+								{
+									$$.charValue = tempValue.charValue;
+									$$.type = CHAR_VAL;
+								}
+								else if(tempValue.type == BOOL_VAL)
+								{
+									$$.boolValue = tempValue.boolValue;
+									$$.type = BOOL_VAL;
+								}
+								
+							}
 							
 						}
-		|INT_NUMBER   	{
+		| INT_NUMBER   	{
 							$$.intValue = $1.intValue;
 							$$.type = INT_VAL;
 						}
@@ -212,9 +224,12 @@ expression_statement: expression SEMICOLON ;
 
 expression:
 	expression PLUS expression {
-									
+									printf("PLUS EXPRESSION\n");
+									printf("TYPES: %d %d\n", $1.type, $3.type);
 									if ($1.type == INT_VAL && $3.type == INT_VAL)
 									{
+										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,
+										$1.intValue + $3.intValue);
 										$$.intValue = $1.intValue + $3.intValue;
 										$$.type = INT_VAL;
 									}
@@ -241,7 +256,10 @@ expression:
 	expression MINUS expression |
 	expression MULT expression |
 	expression DIV expression |
-	value { $$.type= $1.type;  $$.intValue = $1.intValue;		} |
+	value { 
+				printf("AT VALUE: Type = %d intValue = %d\n",$1.type, $1.intValue);
+				$$.type= $1.type;  $$.intValue = $1.intValue;		
+			} |
 
 	expression PLUS_EQ expression |
 	expression MINUS_EQ expression |
@@ -268,7 +286,7 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {		
+var_declaration: 	type IDENTIFIER SEMICOLON {		
 													struct value Value;
 													Value.type = $1;
 													Value.varName = $2;
