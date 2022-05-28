@@ -44,7 +44,6 @@ int createEntry(struct value Value, bool isConst, int declarationType,
 
         if (checkType(declarationType, Value.type))
         {
-
             symbolTableEntry *newNode = new symbolTableEntry();
             newNode->name = VarName;
             newNode->isConst = isConst;
@@ -72,6 +71,49 @@ int createEntry(struct value Value, bool isConst, int declarationType,
         ofstream outfile;
         outfile.open("errors.txt", std::ios::app);
         outfile << "Error: Variable " << VarName << " already declared at line " << alreadyDeclared.second << endl;
+        return 1;
+    }
+}
+
+int updateEntry(struct value Value, int line)
+{
+    char *VarName = Value.varName;
+    map<string, symbolTableEntry *>::iterator it = symbols.find(VarName);
+    if (it != symbols.end())
+    {
+        if (checkType(it->second->type, Value.type))
+        {
+            if (!it->second->isConst)
+            {
+                it->second->Value = Value;
+                it->second->isInit = true;
+                it->second->isUsed = true;
+                it->second->line = line;
+                printSymbol(it->second);
+                return 0;
+            }
+            else
+            {
+                ofstream outfile;
+                outfile.open("errors.txt", std::ios::app);
+                outfile << "Error: Variable " << VarName << " is declared constant at line " << 
+                it->second->line << endl;
+                return 1;
+            }
+        }
+        else
+        {
+            ofstream outfile;
+            outfile.open("errors.txt", std::ios::app);
+            outfile << "Error: Type mismatch in line " << line << endl;
+            return 1;
+        }
+    }
+    else
+    {
+        ofstream outfile;
+        outfile.open("errors.txt", std::ios::app);
+        outfile << "Error: Variable " << VarName << " not declared at line " << line << endl;
         return 1;
     }
 }

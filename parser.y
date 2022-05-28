@@ -9,7 +9,7 @@
 	extern int yylineno;
 	extern int yylex();
 	extern void yyerror(char *s);
-	int yydebug=1;
+	int yydebug = 1;
 %}
 
 
@@ -25,8 +25,6 @@
 		float floatValue;
 	} lexemeValue;
 };
-
-
 
 
 //Mathermatical Expressions
@@ -239,7 +237,6 @@ type: 			INT
 						$$= BOOL_VAL;
 					};
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
-
 																struct value Value;
 																Value.type = $4.type;
 																Value.varName = $2;
@@ -252,8 +249,32 @@ assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
 																createEntry(Value, false, $1, true,
 																false, yylineno);
 															};
-						| IDENTIFIER EQUAL value SEMICOLON ;
-constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
+						| IDENTIFIER EQUAL value SEMICOLON 	{	
+																struct value Value;
+																Value.type = $3.type;
+																Value.varName = $1;
+																Value.intValue = $3.intValue;
+																Value.stringValue = $3.stringValue;
+																Value.charValue = $3.charValue;
+																Value.boolValue = $3.boolValue;														
+																Value.floatValue = $3.floatValue;
+
+																updateEntry(Value, yylineno);
+															};
+constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON 
+															{
+																struct value Value;
+																Value.type = $5.type;
+																Value.varName = $3;
+																Value.intValue = $5.intValue;
+																Value.stringValue = $5.stringValue;
+																Value.charValue = $5.charValue;
+																Value.boolValue = $5.boolValue;														
+																Value.floatValue = $5.floatValue;
+
+																createEntry(Value, true, $2, true,
+																false, yylineno);
+															};
 
 function: 				function_prototype statement;
 						

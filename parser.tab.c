@@ -80,7 +80,7 @@
 	extern int yylineno;
 	extern int yylex();
 	extern void yyerror(char *s);
-	int yydebug=1;
+	int yydebug = 1;
 
 
 /* Line 189 of yacc.c  */
@@ -518,14 +518,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   103,   103,   106,   107,   112,   113,   116,   117,   118,
-     119,   120,   121,   122,   123,   124,   125,   136,   137,   141,
-     142,   147,   152,   156,   157,   158,   159,   160,   161,   165,
-     168,   174,   175,   176,   177,   179,   180,   181,   182,   183,
-     185,   186,   188,   189,   190,   193,   195,   198,   199,   200,
-     204,   221,   225,   229,   233,   237,   241,   255,   256,   258,
-     260,   260,   261,   262,   263,   264,   265,   265,   266,   266,
-     267,   267,   267,   268,   269,   269,   270,   270
+       0,   101,   101,   104,   105,   110,   111,   114,   115,   116,
+     117,   118,   119,   120,   121,   122,   123,   134,   135,   139,
+     140,   145,   150,   154,   155,   156,   157,   158,   159,   163,
+     166,   172,   173,   174,   175,   177,   178,   179,   180,   181,
+     183,   184,   186,   187,   188,   191,   193,   196,   197,   198,
+     202,   219,   223,   227,   231,   235,   239,   252,   264,   279,
+     281,   281,   282,   283,   284,   285,   286,   286,   287,   287,
+     288,   288,   288,   289,   290,   290,   291,   291
 };
 #endif
 
@@ -1583,14 +1583,14 @@ yyreduce:
         case 5:
 
 /* Line 1455 of yacc.c  */
-#line 112 "parser.y"
+#line 110 "parser.y"
     {printf("Expression Statement \n");;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 113 "parser.y"
+#line 111 "parser.y"
     {	
 											printf("Assignment Statement \n");
 										;}
@@ -1599,77 +1599,77 @@ yyreduce:
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 116 "parser.y"
+#line 114 "parser.y"
     {printf("Variable Declaration \n");;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 117 "parser.y"
+#line 115 "parser.y"
     {printf("Constant Declaration \n");;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 118 "parser.y"
+#line 116 "parser.y"
     {printf("If Statement \n");;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 122 "parser.y"
+#line 120 "parser.y"
     {printf("Function \n");;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 123 "parser.y"
+#line 121 "parser.y"
     {printf("Function Call \n");;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 136 "parser.y"
+#line 134 "parser.y"
     {printf("If then statement\n");;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 137 "parser.y"
+#line 135 "parser.y"
     {printf("If then else statement\n");;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 141 "parser.y"
+#line 139 "parser.y"
     {printf("while statment\n");;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 147 "parser.y"
+#line 145 "parser.y"
     {printf("do-while statment\n");;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 152 "parser.y"
+#line 150 "parser.y"
     {printf("for loop\n");;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 168 "parser.y"
+#line 166 "parser.y"
     {
 									// printf("Expression: %d + %d\n", $1, $3);
 									// $$ = $1 + $3;
@@ -1680,7 +1680,7 @@ yyreduce:
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 204 "parser.y"
+#line 202 "parser.y"
     {		
 													struct value Value;
 													Value.type = (yyvsp[(1) - (3)].intValue);
@@ -1703,7 +1703,7 @@ yyreduce:
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 222 "parser.y"
+#line 220 "parser.y"
     {
 						(yyval.intValue) = INT_VAL;
 					;}
@@ -1712,7 +1712,7 @@ yyreduce:
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 226 "parser.y"
+#line 224 "parser.y"
     {
 						(yyval.intValue) = FLOAT_VAL;
 					;}
@@ -1721,7 +1721,7 @@ yyreduce:
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 230 "parser.y"
+#line 228 "parser.y"
     {
 						(yyval.intValue)=CHAR_VAL;
 					;}
@@ -1730,7 +1730,7 @@ yyreduce:
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 234 "parser.y"
+#line 232 "parser.y"
     {
 						(yyval.intValue)= STRING_VAL;
 					;}
@@ -1739,7 +1739,7 @@ yyreduce:
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 238 "parser.y"
+#line 236 "parser.y"
     { 
 						(yyval.intValue)= BOOL_VAL;
 					;}
@@ -1748,9 +1748,8 @@ yyreduce:
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 241 "parser.y"
+#line 239 "parser.y"
     {
-
 																struct value Value;
 																Value.type = (yyvsp[(4) - (5)].lexemeValue).type;
 																Value.varName = (yyvsp[(2) - (5)].stringValue);
@@ -1765,10 +1764,47 @@ yyreduce:
 															;}
     break;
 
+  case 57:
+
+/* Line 1455 of yacc.c  */
+#line 252 "parser.y"
+    {	
+																struct value Value;
+																Value.type = (yyvsp[(3) - (4)].lexemeValue).type;
+																Value.varName = (yyvsp[(1) - (4)].stringValue);
+																Value.intValue = (yyvsp[(3) - (4)].lexemeValue).intValue;
+																Value.stringValue = (yyvsp[(3) - (4)].lexemeValue).stringValue;
+																Value.charValue = (yyvsp[(3) - (4)].lexemeValue).charValue;
+																Value.boolValue = (yyvsp[(3) - (4)].lexemeValue).boolValue;														
+																Value.floatValue = (yyvsp[(3) - (4)].lexemeValue).floatValue;
+
+																updateEntry(Value, yylineno);
+															;}
+    break;
+
+  case 58:
+
+/* Line 1455 of yacc.c  */
+#line 265 "parser.y"
+    {
+																struct value Value;
+																Value.type = (yyvsp[(5) - (6)].lexemeValue).type;
+																Value.varName = (yyvsp[(3) - (6)].stringValue);
+																Value.intValue = (yyvsp[(5) - (6)].lexemeValue).intValue;
+																Value.stringValue = (yyvsp[(5) - (6)].lexemeValue).stringValue;
+																Value.charValue = (yyvsp[(5) - (6)].lexemeValue).charValue;
+																Value.boolValue = (yyvsp[(5) - (6)].lexemeValue).boolValue;														
+																Value.floatValue = (yyvsp[(5) - (6)].lexemeValue).floatValue;
+
+																createEntry(Value, true, (yyvsp[(2) - (6)].intValue), true,
+																false, yylineno);
+															;}
+    break;
+
 
 
 /* Line 1455 of yacc.c  */
-#line 1772 "parser.tab.c"
+#line 1808 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1980,7 +2016,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 272 "parser.y"
+#line 293 "parser.y"
 
 
 void test(int x)

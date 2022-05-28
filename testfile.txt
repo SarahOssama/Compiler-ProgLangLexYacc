@@ -1,5 +1,3 @@
-string s = 1;
-int x = 7;
-bool b = 'd';
+x = 9;
 <<EOF>>
 
