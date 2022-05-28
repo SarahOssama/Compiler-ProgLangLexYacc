@@ -95,17 +95,23 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 18 "parser.y"
+#line 16 "parser.y"
 
-    int intValue;        	/* integer value */
-    float floatValue;       /* float value */
-    char charValue;       	/* character value */
-    char* stringValue; 		/* string value */
+    int intValue;
+    // float floatValue;       /* float value */
+    // char charValue;       	/* character value */
+    // char* stringValue; 		/* string value */
+		
+	struct lexeme{
+		int type;
+		char* name;
+		int intValue;
+	} lexemeValue;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 109 "parser.tab.h"
+#line 115 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

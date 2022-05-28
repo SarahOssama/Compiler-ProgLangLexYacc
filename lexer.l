@@ -6,6 +6,13 @@ int yylineno = 1; //Initialize
 void yyerror(char *s);
 #include "parser.tab.h"
 
+enum type {
+    INT_VAL,
+    FLOAT_VAL,
+    CHAR_VAL,
+    STRING_VAL,
+    BOOL_VAL
+};
 
 %}
 
@@ -73,18 +80,24 @@ void yyerror(char *s);
     /*Stop Characters*/
 "\n"                            {yylineno += 1;}
 [\t\r]+                         ;
-";"								{yylval.stringValue = ""; 
+";"								{ 
                                     return SEMICOLON;}
 
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           {   
-                                    yylval.stringValue = strdup(yytext);
+                                    yylval.lexemeValue.name = strdup(yytext);
                                     printf("Identifier at lexer: %s\n", yytext);                     
                                     return IDENTIFIER;
                                 }
+["][a-zA-Z0-9]*["]              {   
+                                    yylval.lexemeValue.name = strdup(yytext);
+                                    yylval.lexemeValue.type = STRING_VAL;
+                                    return STRING;
+                                } 
 
 [0-9]+                          { 
-                                    yylval.intValue = atoi(yytext); 
+                                    yylval.lexemeValue.intValue = atoi(yytext); 
+                                    yylval.lexemeValue.type = INT_VAL;
                                     return NUMBER;}
 
     /*Operators*/

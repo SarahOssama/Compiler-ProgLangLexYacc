@@ -1,1 +1,1 @@
-Error: Variable x already declared at line 2
+Error: Variable x already declared at line 1

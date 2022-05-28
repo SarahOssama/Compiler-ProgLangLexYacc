@@ -10,17 +10,24 @@
 	extern int yylex();
 	extern void yyerror(char *s);
 	int yydebug=1;
-
-
 %}
 
 
 %union {
-    int intValue;        	/* integer value */
-    float floatValue;       /* float value */
-    char charValue;       	/* character value */
-    char* stringValue; 		/* string value */
+    int intValue;
+    // float floatValue;       /* float value */
+    // char charValue;       	/* character value */
+    // char* stringValue; 		/* string value */
+		
+	struct lexeme{
+		int type;
+		char* name;
+		int intValue;
+	} lexemeValue;
 };
+
+
+
 
 //Mathermatical Expressions
 %token PLUS MINUS MULT DIV 
@@ -43,11 +50,8 @@
 %token CONST
 %token IDENTIFIER
 %token NUMBER
-%type <stringValue> IDENTIFIER
-%type <intValue> NUMBER
-%type <intValue> expression
-
-
+%type <lexemeValue> IDENTIFIER
+%type<intValue> type
 
 
 // Token for if then else 
@@ -74,7 +78,6 @@
 %token WHILEEQ_EQ WHILE
 %token DO
 %token FOR
-
 
 
 //Associativity
@@ -145,8 +148,11 @@ for_statement:
 	;
 
  // Values
-value: IDENTIFIER {printf("IDENTIFIER: %s\n",$1);}|
-	NUMBER {printf("NUMBER: %d\n",$1);}
+value: IDENTIFIER {//printf("IDENTIFIER: %s\n",$1);
+}|
+	NUMBER {//printf("NUMBER: %d\n",$1);
+	}
+	| STRING
 ;
 
 //  Mathematical Expressions
@@ -154,9 +160,9 @@ expression_statement: expression SEMICOLON;
 
 expression:
 	expression PLUS expression {
-									printf("Expression: %d + %d\n", $1, $3);
-									$$ = $1 + $3;
-									printf("$$: %d\n", $$);
+									// printf("Expression: %d + %d\n", $1, $3);
+									// $$ = $1 + $3;
+									// printf("$$: %d\n", $$);
 								} 
 	|
 	expression MINUS expression |
@@ -189,17 +195,22 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {								
-													createEntry($2, false, type_val, -1, false, true, yylineno);
-													}; 
-type: 			INT {type_val = INT_VAL;
+var_declaration: 		type IDENTIFIER SEMICOLON {			
+													createEntry($2.name, false, $1,
+														-1, false, false, yylineno);
+												}; 
+type: 			INT {
+						$$ = INT_VAL;
 					} |
 				FLOAT{type_val= FLOAT_VAL;} |
 				CHAR{type_val=CHAR_VAL;} |
 				STRING {type_val= STRING_VAL;}|
 				BOOL{type_val= BOOL_VAL;};
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {															
-															//createEntry($2, false, type_val, $4, true, false, yylineno);
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {		
+															//checkType($1, $4);
+															//printf("Type at parser: %d\n", $1);
+															// createEntry($2, false, type_val, $4, true, 
+															// false, yylineno);
 															};
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;

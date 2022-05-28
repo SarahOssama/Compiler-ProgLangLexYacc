@@ -1,6 +1,5 @@
-bool b;
 int x;
-string s;
-char c;
+int y;
 int x;
 <<EOF>>
+

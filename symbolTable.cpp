@@ -15,9 +15,12 @@ void initialize()
 
 
 
-bool checkType()
+bool checkType(int type1, int type2)
 {
-
+    if (type1 == type2)
+        return true;
+    else
+        return false;
 }
 
 
