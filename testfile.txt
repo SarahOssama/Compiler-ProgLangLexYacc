@@ -1,7 +1,8 @@
 int x;
 string s;
+char c;
 bool b;
 float f;
-bool b;
+float f;
 <<EOF>>
 

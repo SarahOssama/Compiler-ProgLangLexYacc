@@ -18,7 +18,7 @@
 	char* stringValue;
 	struct lexeme{
 		int type;
-		char* name;
+		char* stringValue;
 		int intValue;
 	} lexemeValue;
 };
@@ -194,9 +194,21 @@ expression:
 	;
 	
 var_declaration: 		type IDENTIFIER SEMICOLON {		
-													printf("Type at parser: %d\n", $1);	
-													createEntry($2, false, $1,
-														-1, false,$1 , false, yylineno);
+													struct value Value;
+													Value.type = $1;
+													Value.varName = $2;
+													if(Value.type == INT_VAL)
+														Value.intValue = -1;
+													else if(Value.type = STRING_VAL)
+														Value.stringValue = (char*)calloc(1, sizeof(char));
+													else if(Value.type = CHAR_VAL)
+														Value.charValue = 'e';
+													else if(Value.type = BOOL_VAL)
+														Value.boolValue = false;
+													else if(Value.type = FLOAT_VAL)
+														Value.floatValue = -1.0;
+
+													createEntry(Value, false, $1, false, false, yylineno);
 												}; 
 type: 			INT 
 					{
@@ -218,11 +230,18 @@ type: 			INT
 					{ 
 						$$= BOOL_VAL;
 					};
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {		
-															//checkType($1, $4.type);
-															//printf("Type at parser: %d\n", $1);
-															//createEntry($2, false, type_val, $4, true, 
-															//false, yylineno);
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
+															// if ($4.type == INT_VAL)
+															// {															
+															// 	createEntry($2, false, $1, $4.intValue, true, 
+															// 	false, yylineno);
+															// }
+															// else if($4.type == STRING_VAL)
+															// {
+															// 	printf("STRING AT PARSER\n");
+															// 	createEntry($2, false, $1, $4.stringValue, true, 
+															// 	false, yylineno);
+															// }
 															};
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;

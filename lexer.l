@@ -89,7 +89,7 @@ enum type {
                                     return IDENTIFIER;
                                 }
 ["][a-zA-Z0-9]*["]              {   
-                                    yylval.lexemeValue.name = strdup(yytext);
+                                    yylval.lexemeValue.stringValue = strdup(yytext);
                                     yylval.lexemeValue.type = STRING_VAL;
                                     return STRING;
                                 } 

@@ -101,7 +101,7 @@ typedef union YYSTYPE
 	char* stringValue;
 	struct lexeme{
 		int type;
-		char* name;
+		char* stringValue;
 		int intValue;
 	} lexemeValue;
 

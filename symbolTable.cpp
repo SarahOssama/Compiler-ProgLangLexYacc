@@ -2,6 +2,7 @@
 #include "symbolTable.h"
 #include <string.h>
 #include <fstream>
+
 void print_test(int type)
 {
     printf("Hello World! %d\n", type);
@@ -34,9 +35,11 @@ pair<bool, int> checkAlreadyDeclared(char *VarName)
     return make_pair(false, 0);
 }
 
-int createEntry(char *VarName, bool isConst, int declarationType, int Value, 
-bool isInit, int initializationType ,bool isUsed, int line)
+int createEntry(struct value Value ,bool isConst, int declarationType,  
+bool isInit, bool isUsed, int line)
 {
+    char* VarName = Value.varName;
+
     pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
     if(!alreadyDeclared.first)
     {
@@ -63,12 +66,28 @@ bool isInit, int initializationType ,bool isUsed, int line)
     }
 }
 
+string getValue(struct value Value)
+{
+    if (Value.type == INT_VAL)
+        return to_string(Value.intValue);
+    else if (Value.type == FLOAT_VAL)
+        return to_string(Value.floatValue);
+    else if (Value.type == CHAR_VAL)
+        return to_string(Value.charValue);
+    else if (Value.type == STRING_VAL)
+        return Value.stringValue;
+    else if (Value.type == BOOL_VAL)
+        return to_string(Value.boolValue);
+    else
+        return "";
+}
+
 void printSymbol(symbolTableEntry *symbol)
 {
     printf("Var Name: %s\n", symbol->name);
     printf("is Const: %d\n", symbol->isConst);
     printf("Type: %d\n", symbol->type);
-    printf("Value: %d\n", symbol->Value);
+    printf("Value: %s\n", getValue(symbol->Value));
     printf("Is Init: %d\n", symbol->isInit);
     printf("Is Used: %d\n", symbol->isUsed);
     printf("Line: %d\n", symbol->line);
@@ -84,6 +103,8 @@ string getType(int type)
     type == 4? "BOOL": "";
 }
 
+
+
 void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
 {
     ofstream outfile;
@@ -92,7 +113,7 @@ void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
     for (auto it = symbolsMap.begin(); it != symbolsMap.end(); ++it)
     {
         outfile << it->first << "         " << it->second->isConst << "           " 
-        << getType(it->second->type) << "     " << it->second->Value << "      " << it->second->isInit <<
+        << getType(it->second->type) << "     " << getValue(it->second->Value) << "      " << it->second->isInit <<
         "         " << it->second->isUsed << "         " << it->second->line << endl;
     }
     outfile.close();

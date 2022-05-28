@@ -12,6 +12,18 @@ using namespace std;
 FILE* errors;
 FILE* symbolTable;
 
+
+struct value
+{
+    int intValue;
+    char charValue;
+    char* stringValue;
+    float floatValue;
+    bool boolValue;
+    char* varName;
+    int type;
+};
+
 enum type {
     INT_VAL,
     FLOAT_VAL,
@@ -28,7 +40,7 @@ public:
     char *name;
     bool isConst;
     int type;
-    int Value;
+    struct value Value;
     bool isInit;
     bool isUsed;
     int line;
