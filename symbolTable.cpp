@@ -55,13 +55,7 @@ int createEntry(struct value Value, bool isConst, int declarationType,
             string temp = VarName;
             symbols[temp] = newNode;
 
-            if (!isInit)
-            {
-                ofstream outfile;
-                outfile.open("errors.txt", std::ios::app);
-                outfile << "Warning: Variable " << VarName <<" is not initialized" << endl;
-            }
-
+        
             printSymbol(newNode);
             return 0;
         }
@@ -163,11 +157,21 @@ string getType(int type)
 
 void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
 {
+
     ofstream outfile;
     outfile.open("symbolTable.txt", std::ios::app);
     outfile << "Var Name   Is Const   Type   Value   Is Init   Is Used   Line\n";
     for (auto it = symbolsMap.begin(); it != symbolsMap.end(); ++it)
     {
+
+        if(!it->second->isInit)
+        {
+            ofstream outfile;
+                outfile.open("errors.txt", std::ios::app);
+                outfile << "Warning: Variable " << it->first <<" is not initialized" << endl;
+        }
+
+
         outfile << it->first << "         " << it->second->isConst << "           "
                 << getType(it->second->type) << "     " << getValue(it->second->Value) << "      " << it->second->isInit << "         " << it->second->isUsed << "         " << it->second->line << endl;
     }
