@@ -1,8 +1,4 @@
-int x;
-string s;
-char c;
-bool b;
-float f;
-float f;
+bool b = false;
+bool x = true;
 <<EOF>>
 

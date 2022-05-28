@@ -83,6 +83,19 @@ enum type {
 ";"								{ 
                                     return SEMICOLON;}
 
+    /*True and False*/
+
+"true"                          {
+                                    yylval.lexemeValue.boolValue = true;
+                                    yylval.lexemeValue.type = BOOL_VAL;
+                                    return TRUE;
+                                }
+"false"                         {
+                                    yylval.lexemeValue.boolValue = false;
+                                    yylval.lexemeValue.type = BOOL_VAL;
+                                    return FALSE;
+                                }
+
     /*Identifier and Numbers*/
 [a-zA-Z][_a-zA-Z0-9]*           {   
                                     yylval.stringValue = strdup(yytext);                                       

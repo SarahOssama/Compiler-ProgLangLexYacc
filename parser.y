@@ -20,6 +20,9 @@
 		int type;
 		char* stringValue;
 		int intValue;
+		char charValue;
+		bool boolValue;
+		float floatValue;
 	} lexemeValue;
 };
 
@@ -76,6 +79,10 @@
 %token WHILEEQ_EQ WHILE
 %token DO
 %token FOR
+
+//True and False
+%token TRUE
+%token FALSE
 
 
 //Associativity
@@ -146,11 +153,11 @@ for_statement:
 	;
 
  // Values
-value: IDENTIFIER {//printf("IDENTIFIER: %s\n",$1);
-}|
-	NUMBER {//printf("NUMBER: %d\n",$1);
-	}
-	| STRING
+value: 	IDENTIFIER 
+		| NUMBER 
+		| STRING
+		| TRUE 
+		| FALSE;
 ;
 
 //  Mathematical Expressions
@@ -231,17 +238,18 @@ type: 			INT
 						$$= BOOL_VAL;
 					};
 assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {
-															// if ($4.type == INT_VAL)
-															// {															
-															// 	createEntry($2, false, $1, $4.intValue, true, 
-															// 	false, yylineno);
-															// }
-															// else if($4.type == STRING_VAL)
-															// {
-															// 	printf("STRING AT PARSER\n");
-															// 	createEntry($2, false, $1, $4.stringValue, true, 
-															// 	false, yylineno);
-															// }
+
+																struct value Value;
+																Value.type = $4.type;
+																Value.varName = $2;
+																Value.intValue = $4.intValue;
+																Value.stringValue = $4.stringValue;
+																Value.charValue = $4.charValue;
+																Value.boolValue = $4.boolValue;														
+																Value.floatValue = $4.floatValue;
+
+																createEntry(Value, false, $1, true,
+																false, yylineno);
 															};
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;

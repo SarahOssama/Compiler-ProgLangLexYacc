@@ -14,8 +14,6 @@ void initialize()
     errors = fopen("errors.txt", "w");
 }
 
-
-
 bool checkType(int type1, int type2)
 {
     if (type1 == type2)
@@ -24,24 +22,23 @@ bool checkType(int type1, int type2)
         return false;
 }
 
-
 pair<bool, int> checkAlreadyDeclared(char *VarName)
 {
-    map<string, symbolTableEntry*>::iterator it = symbols.find(VarName);
+    map<string, symbolTableEntry *>::iterator it = symbols.find(VarName);
     if (it != symbols.end())
     {
-        return make_pair(true,it->second->line);
+        return make_pair(true, it->second->line);
     }
     return make_pair(false, 0);
 }
 
-int createEntry(struct value Value ,bool isConst, int declarationType,  
-bool isInit, bool isUsed, int line)
+int createEntry(struct value Value, bool isConst, int declarationType,
+                bool isInit, bool isUsed, int line)
 {
-    char* VarName = Value.varName;
+    char *VarName = Value.varName;
 
     pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
-    if(!alreadyDeclared.first)
+    if (!alreadyDeclared.first)
     {
         symbolTableEntry *newNode = new symbolTableEntry();
         newNode->name = VarName;
@@ -60,8 +57,8 @@ bool isInit, bool isUsed, int line)
     else
     {
         ofstream outfile;
-        outfile.open("errors.txt",std::ios::app);
-        outfile << "Error: Variable " << VarName <<" already declared at line "<< alreadyDeclared.second << endl;
+        outfile.open("errors.txt", std::ios::app);
+        outfile << "Error: Variable " << VarName << " already declared at line " << alreadyDeclared.second << endl;
         return 1;
     }
 }
@@ -77,7 +74,7 @@ string getValue(struct value Value)
     else if (Value.type == STRING_VAL)
         return Value.stringValue;
     else if (Value.type == BOOL_VAL)
-        return to_string(Value.boolValue);
+        return Value.boolValue ? "true" : "false";
     else
         return "";
 }
@@ -96,27 +93,22 @@ void printSymbol(symbolTableEntry *symbol)
 
 string getType(int type)
 {
-    return type == 0 ? "INT":
-    type == 1 ? "FLOAT":
-    type == 2? "CHAR":
-    type == 3? "STRING":
-    type == 4? "BOOL": "";
+    return type == 0 ? "INT" : type == 1 ? "FLOAT"
+                           : type == 2   ? "CHAR"
+                           : type == 3   ? "STRING"
+                           : type == 4   ? "BOOL"
+                                         : "";
 }
-
-
 
 void writeSymbolTable(map<string, symbolTableEntry *> symbolsMap)
 {
     ofstream outfile;
-    outfile.open("symbolTable.txt",std::ios::app);
+    outfile.open("symbolTable.txt", std::ios::app);
     outfile << "Var Name   Is Const   Type   Value   Is Init   Is Used   Line\n";
     for (auto it = symbolsMap.begin(); it != symbolsMap.end(); ++it)
     {
-        outfile << it->first << "         " << it->second->isConst << "           " 
-        << getType(it->second->type) << "     " << getValue(it->second->Value) << "      " << it->second->isInit <<
-        "         " << it->second->isUsed << "         " << it->second->line << endl;
+        outfile << it->first << "         " << it->second->isConst << "           "
+                << getType(it->second->type) << "     " << getValue(it->second->Value) << "      " << it->second->isInit << "         " << it->second->isUsed << "         " << it->second->line << endl;
     }
     outfile.close();
 }
-
-

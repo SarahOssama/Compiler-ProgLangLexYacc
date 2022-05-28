@@ -1,6 +1,3 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line
-b         0           BOOL           0         0         4
-c         0           CHAR           0         0         3
-f         0           FLOAT           0         0         5
-s         0           STRING           0         0         2
-x         0           INT     -1      0         0         1
+b         0           BOOL     false      1         0         1
+x         0           BOOL     true      1         0         2

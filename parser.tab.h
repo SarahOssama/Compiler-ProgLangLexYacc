@@ -79,12 +79,14 @@
      WHILE = 295,
      DO = 296,
      FOR = 297,
-     IFX = 298,
-     LT = 299,
-     GT = 300,
-     NE = 301,
-     LE = 302,
-     GE = 303
+     TRUE = 298,
+     FALSE = 299,
+     IFX = 300,
+     LT = 301,
+     GT = 302,
+     NE = 303,
+     LE = 304,
+     GE = 305
    };
 #endif
 
@@ -103,12 +105,15 @@ typedef union YYSTYPE
 		int type;
 		char* stringValue;
 		int intValue;
+		char charValue;
+		bool boolValue;
+		float floatValue;
 	} lexemeValue;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 112 "parser.tab.h"
+#line 117 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
