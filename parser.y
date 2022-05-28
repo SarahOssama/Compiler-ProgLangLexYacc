@@ -52,6 +52,12 @@
 %type<intValue> type
 %type<lexemeValue> value
 %type<lexemeValue> expression
+%type<lexemeValue> INT_NUMBER
+%type<lexemeValue> FLOAT_NUMBER
+%type<lexemeValue> CHAR
+%type<lexemeValue> STRING
+%type<lexemeValue> TRUE
+%type<lexemeValue> FALSE
 
 
 // Token for if then else 
@@ -153,34 +159,52 @@ for_statement:
 
  // Values
 value: 	IDENTIFIER 		{ 
-							symbolTableEntry* entry = returnVal($1);
+							// symbolTableEntry* entry = returnVal($1);
 							
-							if(entry !=nullptr)
-							{
-								if(entry->type == INT){
-									$$.intValue = entry->intValue;
-								}
-								else if(entry->type == FLOAT){
-									$$.floatValue = entry->floatValue;
-								}
-								else if(entry->type == STRING){
-									$$.stringValue = entry->stringValue;
-								}
-								else if(entry->type == CHAR){
-									$$.charValue = entry->charValue;
-								}
-								else if(entry->type == BOOL)
-									$$.boolValue = entry->boolValue;
+							// if(entry !=nullptr)
+							// {
+							// 	if(entry->type == INT){
+							// 		$$.intValue = entry->intValue;
+							// 	}
+							// 	else if(entry->type == FLOAT){
+							// 		$$.floatValue = entry->floatValue;
+							// 	}
+							// 	else if(entry->type == STRING){
+							// 		$$.stringValue = entry->stringValue;
+							// 	}
+							// 	else if(entry->type == CHAR){
+							// 		$$.charValue = entry->charValue;
+							// 	}
+							// 	else if(entry->type == BOOL)
+							// 		$$.boolValue = entry->boolValue;
 								
-							}
+							// }
 							
 						}
-		| INT_NUMBER   {$$.intValue=$1.intValue;}
-		| FLOAT_NUMBER {$$.floatValue=$1.floatValue;}
-		| CHAR			{$$.charValue=$1.charValue;}
-		| STRING		{$$.stringValue=$1.stringValue;}
-		| TRUE 			{$$.boolValue=$1.boolValue;}
-		| FALSE		{$$.boolValue=$1.boolValue;}
+		|INT_NUMBER   	{
+							$$.intValue = $1.intValue;
+							$$.type = INT_VAL;
+						}
+		| FLOAT_NUMBER 	{
+							$$.floatValue = $1.floatValue;
+							$$.type = FLOAT_VAL;
+						}
+		| CHAR			{
+							$$.charValue = $1.charValue;
+							$$.type = CHAR_VAL;
+						}
+		| STRING		{
+							$$.stringValue = $1.stringValue;
+							$$.type = STRING_VAL;
+						}
+		| TRUE 			{
+							$$.boolValue = $1.boolValue;
+							$$.type = BOOL_VAL;
+						}
+		| FALSE			{
+							$$.boolValue=$1.boolValue;
+							$$.type = BOOL_VAL;
+						}
 ;
 
 //  Mathematical Expressions
@@ -188,10 +212,30 @@ expression_statement: expression SEMICOLON ;
 
 expression:
 	expression PLUS expression {
-									//  printf("Expression: %d + %d\n", $1, $3);
-									if($1.type == INT_VAL && $3.type == INT_VAL)
-									 	$$.intValue = $1.intValue + $3.intValue;
-									// printf("hello: \n" );
+									
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.intValue = $1.intValue + $3.intValue;
+										$$.type = INT_VAL;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.floatValue = $1.floatValue + $3.floatValue;
+										$$.type = FLOAT_VAL;
+									}
+									if ($1.type == INT_VAL && $3.type == FLOAT_VAL)
+									{
+										// printf("1: %d, 3: %f, $$ = %f\n", $1.intValue, $3.floatValue,
+										// $1.intValue + $3.floatValue);
+										$$.floatValue = $1.intValue + $3.floatValue;
+										$$.type = FLOAT_VAL;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == INT_VAL)
+									{
+										$$.floatValue = $1.floatValue + $3.intValue;
+										$$.type = FLOAT_VAL;
+									}
+									
 								} 
 	|
 	expression MINUS expression |
