@@ -1,0 +1,4 @@
+Var Name   Is Const   Type   Value   Is Init   Is Used   Line
+q ;         0           BOOL     -1      0         0         3
+x ;         0           INT     -1      0         0         1
+y ;         0           STRING     -1      0         0         2

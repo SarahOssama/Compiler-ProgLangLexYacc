@@ -10,6 +10,8 @@ void yyerror(char *s);
 %}
 
 %%
+
+"<<EOF>>"                       return EOF;
     /* Mathematical Expressions */
 "+"                             return PLUS;
 "-"                             return MINUS;

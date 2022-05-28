@@ -93,6 +93,7 @@
 
 %%
 
+
 program: statements;
 
 statements : 
@@ -190,8 +191,9 @@ expression:
 
 	;
 	
-var_declaration: 		type IDENTIFIER SEMICOLON {print_test(type_val); initiateINT($2,false,type_val,-1,0,0,yylineno);};
-type: 			INT {type_val= INT_VAL;} |
+var_declaration: 		type IDENTIFIER SEMICOLON {createEntry($2, false, type_val, -1, 0, 0, yylineno);};
+type: 			INT {type_val = INT_VAL;
+					} |
 				FLOAT{type_val= FLOAT_VAL;} |
 				CHAR{type_val=CHAR_VAL;} |
 				STRING {type_val= STRING_VAL;}|
@@ -232,26 +234,19 @@ void test(int x)
 //For reading from file
 int main (void)
 {
-	/* print_test(); */
-    yyin = fopen("testfile.txt", "r+");
-    if (yyin == NULL)
-    {
-        printf("File Not Found\n");
-    }
-    else
-    {
-        printf(">>>> Test File <<<<\n\n");
-        FILE* testFile; char ch;
-        testFile = fopen("testfile.txt","r");
-        while((ch=fgetc(testFile))!=EOF)
-        {
-            printf("%c",ch);
-        }
-        printf("\n\n\n>>> Parsing <<<<\n\n");
-        yyparse();
-				writeSymbolTable(symbols);
-    }
-    fclose(yyin);
-	/* yyparse(); */
+	printf(">>> OPENING FILE <<<\n");
+	FILE *symbolTable = fopen("symbolTable.txt", "w");
+   	FILE *myfile = fopen("testfile.txt", "r");
+	if (!myfile) {
+		printf("Could not open");
+		return -1;
+	}
+	yyin = myfile;
+	printf(">>> PARSING <<<\n");
+	while (!feof(yyin)){
+		yyparse();    
+	} 
+	printf(">>> FINISHED PARSING <<<\n");
+	writeSymbolTable(symbols);
     return 0;
 }
