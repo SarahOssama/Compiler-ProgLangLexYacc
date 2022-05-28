@@ -11,9 +11,6 @@
 	extern void yyerror(char *s);
 	int yydebug=1;
 
-	//test
-	void test(int);
-	int t = 9;
 
 %}
 
@@ -193,16 +190,17 @@ expression:
 	;
 	
 var_declaration: 		type IDENTIFIER SEMICOLON {								
-													printf("Identifier at Var: %s\n",$2);
-													createEntry($2, false, type_val, -1, 0, 0, yylineno);
-												}; 
+													createEntry($2, false, type_val, -1, false, true, yylineno);
+													}; 
 type: 			INT {type_val = INT_VAL;
 					} |
 				FLOAT{type_val= FLOAT_VAL;} |
 				CHAR{type_val=CHAR_VAL;} |
 				STRING {type_val= STRING_VAL;}|
 				BOOL{type_val= BOOL_VAL;};
-assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {printf("IDENTIFIER AT Assignment Statement %s\n",$2);}
+assignment_statement: 	type IDENTIFIER EQUAL value SEMICOLON {															
+															//createEntry($2, false, type_val, $4, true, false, yylineno);
+															};
 						| IDENTIFIER EQUAL value SEMICOLON ;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON ;
 
@@ -238,8 +236,9 @@ void test(int x)
 //For reading from file
 int main (void)
 {
+	initialize();
 	printf(">>> OPENING FILE <<<\n");
-	FILE *symbolTable = fopen("symbolTable.txt", "w");
+	
    	FILE *myfile = fopen("testfile.txt", "r");
 	if (!myfile) {
 		printf("Could not open");

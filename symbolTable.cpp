@@ -7,21 +7,56 @@ void print_test(int type)
     printf("Hello World! %d\n", type);
 }
 
+void initialize()
+{
+    symbolTable = fopen("symbolTable.txt", "w");
+    errors = fopen("errors.txt", "w");
+}
+
+
+
+bool checkType()
+{
+
+}
+
+
+pair<bool, int> checkAlreadyDeclared(char *VarName)
+{
+    map<string, symbolTableEntry*>::iterator it = symbols.find(VarName);
+    if (it != symbols.end())
+    {
+        return make_pair(true,it->second->line);
+    }
+    return make_pair(false, 0);
+}
+
 int createEntry(char *VarName, bool isConst, int type, int Value, bool isInit, bool isUsed, int line)
 {
-    symbolTableEntry *newNode = new symbolTableEntry();
-    newNode->name = VarName;
-    newNode->isConst = isConst;
-    newNode->type = type;
-    newNode->Value = Value;
-    newNode->isInit = isInit;
-    newNode->isUsed = isUsed;
-    newNode->line = line;
-    string temp = VarName;
-    symbols[temp] = newNode;
+    pair<bool, int> alreadyDeclared = checkAlreadyDeclared(VarName);
+    if(!alreadyDeclared.first)
+    {
+        symbolTableEntry *newNode = new symbolTableEntry();
+        newNode->name = VarName;
+        newNode->isConst = isConst;
+        newNode->type = type;
+        newNode->Value = Value;
+        newNode->isInit = isInit;
+        newNode->isUsed = isUsed;
+        newNode->line = line;
+        string temp = VarName;
+        symbols[temp] = newNode;
 
-    printSymbol(newNode);
-    return 0;
+        printSymbol(newNode);
+        return 0;
+    }
+    else
+    {
+        ofstream outfile;
+        outfile.open("errors.txt",std::ios::app);
+        outfile << "Error: Variable " << VarName <<" already declared at line "<< alreadyDeclared.second << endl;
+        return 1;
+    }
 }
 
 void printSymbol(symbolTableEntry *symbol)

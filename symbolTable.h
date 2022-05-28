@@ -9,6 +9,9 @@ using namespace std;
 // #define STRING_VAL 4
 // #define BOOL_VAL 5
 
+FILE* errors;
+FILE* symbolTable;
+
 enum type {
     INT_VAL,
     FLOAT_VAL,
@@ -32,6 +35,8 @@ public:
     int scope;
 };
 map<string, symbolTableEntry*> symbols;
+
+void initialize();
 
 string getType(int type);
 

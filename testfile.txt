@@ -1,2 +1,6 @@
-int rt;
+bool b;
+int x;
+string s;
+char c;
+int x;
 <<EOF>>
