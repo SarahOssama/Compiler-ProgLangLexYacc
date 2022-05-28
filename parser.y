@@ -49,7 +49,7 @@
 //Values 
 %token CONST
 %token IDENTIFIER
-%token NUMBER
+%token INT_NUMBER FLOAT_NUMBER
 %type<stringValue> IDENTIFIER
 %type<intValue> type
 %type<lexemeValue> value
@@ -154,7 +154,8 @@ for_statement:
 
  // Values
 value: 	IDENTIFIER 
-		| NUMBER 
+		| INT_NUMBER 
+		| FLOAT_NUMBER
 		| STRING
 		| TRUE 
 		| FALSE;
@@ -263,7 +264,7 @@ function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
 						| VOID IDENTIFIER OPENBRACKET CLOSEDBRACKET;
 parameters: 			parameters COMMA single_parameter | single_parameter ;
 single_parameter: 		type IDENTIFIER | type IDENTIFIER EQUAL constant ;
-constant: 				NUMBER | STRING;
+constant: 				INT_NUMBER | FLOAT_NUMBER | STRING;
 function_call: 			IDENTIFIER OPENBRACKET call_parameters CLOSEDBRACKET SEMICOLON ;
 call_parameters:		call_parameter |;
 call_parameter:			call_parameter COMMA value | value ;

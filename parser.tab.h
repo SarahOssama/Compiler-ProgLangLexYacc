@@ -62,31 +62,32 @@
      ENDLINE = 278,
      CONST = 279,
      IDENTIFIER = 280,
-     NUMBER = 281,
-     IF = 282,
-     THEN = 283,
-     ELSE = 284,
-     OPENBRACKET = 285,
-     CLOSEDBRACKET = 286,
-     OPENCURL = 287,
-     CLOSEDCURL = 288,
-     EQUAL = 289,
-     VOID = 290,
-     RETURN = 291,
-     COMMA = 292,
-     COLON = 293,
-     WHILEEQ_EQ = 294,
-     WHILE = 295,
-     DO = 296,
-     FOR = 297,
-     TRUE = 298,
-     FALSE = 299,
-     IFX = 300,
-     LT = 301,
-     GT = 302,
-     NE = 303,
-     LE = 304,
-     GE = 305
+     INT_NUMBER = 281,
+     FLOAT_NUMBER = 282,
+     IF = 283,
+     THEN = 284,
+     ELSE = 285,
+     OPENBRACKET = 286,
+     CLOSEDBRACKET = 287,
+     OPENCURL = 288,
+     CLOSEDCURL = 289,
+     EQUAL = 290,
+     VOID = 291,
+     RETURN = 292,
+     COMMA = 293,
+     COLON = 294,
+     WHILEEQ_EQ = 295,
+     WHILE = 296,
+     DO = 297,
+     FOR = 298,
+     TRUE = 299,
+     FALSE = 300,
+     IFX = 301,
+     LT = 302,
+     GT = 303,
+     NE = 304,
+     LE = 305,
+     GE = 306
    };
 #endif
 
@@ -113,7 +114,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 117 "parser.tab.h"
+#line 118 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

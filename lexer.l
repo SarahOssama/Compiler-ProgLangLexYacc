@@ -110,9 +110,14 @@ enum type {
 [0-9]+                          { 
                                     yylval.lexemeValue.intValue = atoi(yytext); 
                                     yylval.lexemeValue.type = INT_VAL;
-                                    return NUMBER;}
-
-    /*Operators*/
+                                    return INT_NUMBER;                               
+                                }
+[0-9]+[\.][0-9]+                {
+                                    yylval.lexemeValue.floatValue = atof(yytext);
+                                    yylval.lexemeValue.type = FLOAT_VAL;
+                                    return FLOAT_NUMBER;                                 
+                                }       
+    /*Operators*/   
     /*Assignment Operator*/
 "="				                return EQUAL;
 
