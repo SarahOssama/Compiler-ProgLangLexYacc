@@ -1,8 +1,6 @@
-MOV 	3 	R0
+MOV 	7 	R0
 MOV 	R0 	x
-MOV 	8 	R1
+MOV 	2 	R1
 MOV 	R1 	y
-MOV 	1 	R2
-MOV 	R2 	m
-MOV 	12 	R3
-MOV 	R3 	z
+MOV 	5 	R2
+MOV 	R2 	z

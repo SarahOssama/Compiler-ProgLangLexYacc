@@ -223,38 +223,59 @@ value: 	IDENTIFIER 		{
 expression_statement: expression SEMICOLON ;
 
 expression:
-	expression PLUS expression {
-									printf("PLUS EXPRESSION\n");
-									printf("TYPES: %d %d\n", $1.type, $3.type);
-									if ($1.type == INT_VAL && $3.type == INT_VAL)
-									{
-										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,
-										$1.intValue + $3.intValue);
-										$$.intValue = $1.intValue + $3.intValue;
-										$$.type = INT_VAL;
-									}
-									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
-									{
-										$$.floatValue = $1.floatValue + $3.floatValue;
-										$$.type = FLOAT_VAL;
-									}
-									if ($1.type == INT_VAL && $3.type == FLOAT_VAL)
-									{
-										// printf("1: %d, 3: %f, $$ = %f\n", $1.intValue, $3.floatValue,
-										// $1.intValue + $3.floatValue);
-										$$.floatValue = $1.intValue + $3.floatValue;
-										$$.type = FLOAT_VAL;
-									}
-									if ($1.type == FLOAT_VAL && $3.type == INT_VAL)
-									{
-										$$.floatValue = $1.floatValue + $3.intValue;
-										$$.type = FLOAT_VAL;
+		expression PLUS expression {
+										printf("PLUS EXPRESSION\n");
+										printf("TYPES: %d %d\n", $1.type, $3.type);
+										if ($1.type == INT_VAL && $3.type == INT_VAL)
+										{
+											$$.intValue = $1.intValue + $3.intValue;
+											$$.type = INT_VAL;
+										}
+										if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+										{
+											$$.floatValue = $1.floatValue + $3.floatValue;
+											$$.type = FLOAT_VAL;
+										}
+										if ($1.type == INT_VAL && $3.type == FLOAT_VAL)
+										{
+											$$.floatValue = $1.intValue + $3.floatValue;
+											$$.type = FLOAT_VAL;
+										}
+										if ($1.type == FLOAT_VAL && $3.type == INT_VAL)
+										{
+											$$.floatValue = $1.floatValue + $3.intValue;
+											$$.type = FLOAT_VAL;
+										}
+										
+									} 
+	| expression MINUS expression 	{
+										printf("MINUS EXPRESSION\n");
+										printf("TYPES: %d %d\n", $1.type, $3.type);
+										if ($1.type == INT_VAL && $3.type == INT_VAL)
+										{
+
+											$$.intValue = $1.intValue - $3.intValue;
+											$$.type = INT_VAL;
+										}
+										if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+										{
+											$$.floatValue = $1.floatValue - $3.floatValue;
+											$$.type = FLOAT_VAL;
+										}
+										if ($1.type == INT_VAL && $3.type == FLOAT_VAL)
+										{
+											$$.floatValue = $1.intValue - $3.floatValue;
+											$$.type = FLOAT_VAL;
+										}
+										if ($1.type == FLOAT_VAL && $3.type == INT_VAL)
+										{
+											$$.floatValue = $1.floatValue - $3.intValue;
+											$$.type = FLOAT_VAL;
+										}
 									}
 									
-								} 
-	|
-	expression MINUS expression |
-	expression MULT expression 
+								 
+	| expression MULT expression 
 								{
 									
 									printf("MULTIPLY EXPRESSION\n");
