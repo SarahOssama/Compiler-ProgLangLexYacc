@@ -1,0 +1,2 @@
+Error: Variable y is not declared
+Error: Variable x not declared at line 1

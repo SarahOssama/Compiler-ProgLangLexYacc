@@ -138,9 +138,9 @@ int yywrap(void)
 }
 
 void yyerror(char *s) {
-   
+    printf("OK\n");
     FILE *errorsFile = fopen("Syntax Errors.txt", "w");
-    fprintf(stderr, "\n ERROR ON LINE %d :\n %s \n", yylineno, s);
-    fprintf(errorsFile, "SYNTAX ERROR ON LINE %d : %s \n", yylineno-1, s);
+    fprintf(errorsFile, "SYNTAX ERROR ON LINE aa%d : %s \n", yylineno-1, s);
+    fprintf(stderr, "\n ERROR ON LINE 44%d :\n %s \n", yylineno, s);
     exit(0);
 }

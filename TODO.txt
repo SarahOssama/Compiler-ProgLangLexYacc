@@ -1,2 +1,7 @@
 - Quadruples
+- +=
+- if
+- for
+- while
+- func
 - GUI					-Optional

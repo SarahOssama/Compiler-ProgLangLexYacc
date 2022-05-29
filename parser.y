@@ -158,12 +158,12 @@ for_statement:
 	;
 
  // Values
-value: 	IDENTIFIER 		{ 
+value: 	IDENTIFIER 		{ 	
 							symbolTableEntry* entry = returnVal($1);
-							struct value tempValue = entry->Value;
 							if(entry != nullptr)
 							{
 								
+								struct value tempValue = entry->Value;
 								if(tempValue.type == INT_VAL)
 								{
 									$$.intValue = tempValue.intValue;
@@ -310,7 +310,7 @@ expression:
 	|
 	expression DIV expression |
 	value { 
-				printf("AT VALUE: Type = %d intValue = %d\n",$1.type, $1.intValue);
+				//printf("AT VALUE: Type = %d intValue = %d\n",$1.type, $1.intValue);
 				$$.type= $1.type;  $$.intValue = $1.intValue;		
 			} |
 
@@ -346,9 +346,11 @@ var_declaration: 	type IDENTIFIER SEMICOLON {
 													if(Value.type == INT_VAL)
 														Value.intValue = -1;
 													else if(Value.type == STRING_VAL)
-														Value.stringValue = (char*)calloc(1, sizeof(char));
+													{	
+														Value.stringValue = " ";
+													}
 													else if(Value.type == CHAR_VAL)
-														Value.charValue = 'e';
+														Value.charValue = ' ';
 													else if(Value.type == BOOL_VAL)
 														Value.boolValue = false;
 													else if(Value.type == FLOAT_VAL)
@@ -390,18 +392,18 @@ assignment_statement: 	type IDENTIFIER EQUAL expression SEMICOLON {
 																createEntry(Value, false, $1, true,
 																false, yylineno);
 															};
-						| IDENTIFIER EQUAL expression SEMICOLON 	{	
-																struct value Value;
-																Value.type = $3.type;
-																Value.varName = $1;
-																Value.intValue = $3.intValue;
-																Value.stringValue = $3.stringValue;
-																Value.charValue = $3.charValue;
-																Value.boolValue = $3.boolValue;														
-																Value.floatValue = $3.floatValue;
+						| IDENTIFIER EQUAL expression SEMICOLON {
+																	struct value Value;
+																	Value.type = $3.type;
+																	Value.varName = $1;
+																	Value.intValue = $3.intValue;
+																	Value.stringValue = $3.stringValue;
+																	Value.charValue = $3.charValue;
+																	Value.boolValue = $3.boolValue;														
+																	Value.floatValue = $3.floatValue;
 
-																updateEntry(Value, yylineno);
-															};
+																	updateEntry(Value, yylineno);
+																};
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON 
 															{
 																struct value Value;

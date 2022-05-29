@@ -1,6 +1,0 @@
-MOV 	7 	R0
-MOV 	R0 	x
-MOV 	2 	R1
-MOV 	R1 	y
-MOV 	5 	R2
-MOV 	R2 	z
