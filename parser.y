@@ -342,7 +342,26 @@ expression:
 				$$.type= $1.type;  $$.intValue = $1.intValue;		
 			} |
 
-	expression PLUS_EQ expression |
+	expression PLUS_EQ expression 
+								{
+									struct value TValue;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,	$1.intValue + $3.intValue);
+										TValue.intValue = $1.intValue + $3.intValue;
+										TValue.type = INT_VAL;
+										TValue.varName = $3.varName;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										TValue.floatValue = $1.floatValue + $3.floatValue;
+										TValue.type = FLOAT_VAL;
+										TValue.varName = $3.varName;
+
+									}
+									updateEntry(TValue, yylineno);
+								}
+	|
 	expression MINUS_EQ expression |
 	expression MULT_EQ expression |
 	expression DIV_EQ expression |
@@ -357,12 +376,72 @@ expression:
 										$$.boolValue = $1.floatValue == $3.floatValue;
 									}
 								} 
-	| expression GE expression |
-	expression LE expression |
+	| expression GE expression 
+								{
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue >= $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue >= $3.floatValue;
+									}
+								}
+	|
+	expression LE expression 
+								{
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue <= $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue <= $3.floatValue;
+									}
+								}
+	|
 	
-	expression NE expression |
-	expression GT expression |
-	expression LT expression |
+	expression NE expression 
+								{
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue != $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue != $3.floatValue;
+									}
+								}
+	|
+	expression GT expression 
+								{
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue > $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue > $3.floatValue;
+									}
+								}
+	|
+	expression LT expression 
+								{
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue < $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue < $3.floatValue;
+									}
+								}
+	|
 
 
 	expression INC |
