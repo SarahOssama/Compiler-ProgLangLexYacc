@@ -120,7 +120,7 @@ statement :
 										}
 	| var_declaration 					{printf("Variable Declaration \n");}
 	| constant_declaration				{printf("Constant Declaration \n");}
-	| if_statement						{printf("If Statement \n");}
+	//| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
 	| for_statement
@@ -128,19 +128,37 @@ statement :
 	| function_call						{printf("Function Call \n");}
 	| OPENCURL {openBracket();} statements CLOSEDCURL {closeBracket();}
 	| RETURN return_value SEMICOLON
+	| MIF
+	| UIF
 	;
 
 
-/* // Block of code
-block_statement : 
-	OPENCURL statement CLOSEDCURL ENDLINE 		{printf("Block Statement \n");}
-	; */
+// MIF: 	IF OPENBRACKET expression CLOSEDBRACKET
+// 		OPENCURL MIF CLOSEDCURL 
+// 		ELSE OPENCURL MIF CLOSEDCURL {printf("Okk\n");}
+// 	| statements ;
+
+// UIF: IF OPENBRACKET expression CLOSEDBRACKET OPENCURL 
+// 		MIF CLOSEDCURL 
+// 	| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL 
+// 		MIF CLOSEDCURL 
+// 		ELSE  OPENCURL
+// 		UIF CLOSEDCURL
+// 	;
 
 //if statment
 if_statement: 
-		IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}  {printf("If then statement\n");}
-		| IF OPENBRACKET expression CLOSEDBRACKET THEN OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} ELSE OPENCURL {openBracket();} statement CLOSEDCURL {printf("If then else statement\n");}
-	;
+		IF OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();}
+		statement CLOSEDCURL {closeBracket();}  {printf("If then statement\n");}
+		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
+		statement CLOSEDCURL ELSE OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}
+		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
+		statement CLOSEDCURL ELSE IF OPENBRACKET expression CLOSEDBRACKET 
+		OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}
+		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
+		statement CLOSEDCURL ELSE IF OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();} 
+		statement CLOSEDCURL {closeBracket();} ELSE OPENCUR statement CLOSEDCURL
+		
 //while statment
 while_statement:
 		WHILE OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}  {printf("while statment\n");}

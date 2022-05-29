@@ -1,6 +1,2 @@
-MOV 	1 	R0
+MOV 	0 	R0
 MOV 	R0 	x
-MOV 	2 	R1
-MOV 	R1 	y
-MOV 	0 	R2
-MOV 	R2 	b
