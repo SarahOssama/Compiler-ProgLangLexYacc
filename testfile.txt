@@ -1,2 +1,4 @@
-x = y;
+int x = 1;
+int y = 2;
+bool b = x == y;
 <<EOF>>

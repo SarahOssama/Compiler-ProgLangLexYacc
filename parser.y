@@ -310,8 +310,6 @@ expression:
 	|
 	expression DIV expression 
 								{
-									printf("DIVISION EXPRESSION\n");
-									printf("TYPES: %d %d\n", $1.type, $3.type);
 									if ($1.type == INT_VAL && $3.type == INT_VAL)
 									{
 										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,
@@ -348,9 +346,18 @@ expression:
 	expression MINUS_EQ expression |
 	expression MULT_EQ expression |
 	expression DIV_EQ expression |
-	expression EQ_EQ expression |
-
-	expression GE expression |
+	expression EQ_EQ expression {
+									$$.type = BOOL_VAL;
+									if ($1.type == INT_VAL && $3.type == INT_VAL)
+									{
+										$$.boolValue = $1.intValue == $3.intValue;
+									}
+									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									{
+										$$.boolValue = $1.floatValue == $3.floatValue;
+									}
+								} 
+	| expression GE expression |
 	expression LE expression |
 	
 	expression NE expression |

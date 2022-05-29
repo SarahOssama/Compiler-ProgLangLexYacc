@@ -1,5 +1,6 @@
 - Quadruples
 - +=
+- string x = "s"; string  = "x"; string z = x+y;
 - if
 - for
 - while
