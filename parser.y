@@ -170,14 +170,10 @@ do_while_statement:
 	DO OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} WHILE OPENBRACKET expression CLOSEDBRACKET  {printf("do-while statment\n");}
 	;
 
-// for statment
-// for_statement:
-// 	FOR OPENBRACKET assignment_statement 
-// 	expression SEMICOLON expression 
-// 	SEMICOLON CLOSEDBRACKET 
-// 	OPENCURL statement CLOSEDCURL ;
-
-for_statement: FOR;
+//for statment
+for_statement:
+	FOR OPENBRACKET assignment_statement expression SEMICOLON expression CLOSEDBRACKET
+	OPENCURL statement CLOSEDCURL;
 
 
  // Values
