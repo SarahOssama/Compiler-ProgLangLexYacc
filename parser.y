@@ -482,7 +482,7 @@ expression:
 	expression AND expression |
 	expression OR expression |
 	NOT expression
-
+	| function_call
 	;
 	
 var_declaration: 	type IDENTIFIER SEMICOLON {		
@@ -550,6 +550,8 @@ assignment_statement: 	type IDENTIFIER EQUAL expression SEMICOLON {
 
 																	updateEntry(Value, yylineno);
 																};
+						| type IDENTIFIER EQUAL function_call
+						| IDENTIFIER EQUAL function_call;
 constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON 
 															{
 																struct value Value;
@@ -567,7 +569,7 @@ constant_declaration: 	CONST type IDENTIFIER EQUAL value SEMICOLON
 
 function: 				function_prototype statement;
 						
-return_value: 			value | ;	
+return_value: 			value | expression | ;	
 function_prototype:		type IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET 
 						| type IDENTIFIER OPENBRACKET CLOSEDBRACKET
 						| VOID IDENTIFIER OPENBRACKET parameters CLOSEDBRACKET
