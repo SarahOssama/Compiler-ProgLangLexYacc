@@ -1,3 +1,1 @@
 Var Name   Is Const   Type   Value   Is Init   Is Used   Line  Scope
-i         0           INT     0      1         0         1    0
-x         0           INT     -1      0         0         3    0

@@ -1,1 +1,2 @@
-Warning: Variable x is not initialized
+Error: Variable x is not declared
+Error: Variable x is not declared

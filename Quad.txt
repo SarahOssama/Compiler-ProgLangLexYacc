@@ -1,4 +1,0 @@
-MOV 	0 	R0
-MOV 	R0 	i
-MOV 	-1 	R1
-MOV 	R1 	x
