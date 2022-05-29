@@ -167,7 +167,8 @@ while_statement:
 
 // do while statment
 do_while_statement:
-		DO OPENCURL statements CLOSEDCURL WHILE OPENBRACKET expression CLOSEDBRACKET SEMICOLON;
+		DO OPENCURL statements CLOSEDCURL WHILE OPENBRACKET expression 
+		CLOSEDBRACKET SEMICOLON;
 
 //for statment
 for_statement:

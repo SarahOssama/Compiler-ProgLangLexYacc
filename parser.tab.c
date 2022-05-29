@@ -525,13 +525,13 @@ static const yytype_uint16 yyrline[] =
 {
        0,   108,   108,   111,   112,   117,   118,   121,   122,   123,
      124,   125,   126,   127,   128,   129,   129,   130,   151,   153,
-     155,   158,   164,   164,   164,   165,   170,   174,   179,   214,
-     218,   222,   226,   230,   234,   241,   244,   269,   296,   329,
-     358,   363,   383,   384,   385,   386,   397,   410,   424,   437,
-     450,   465,   467,   470,   471,   472,   476,   495,   499,   503,
-     507,   511,   515,   529,   541,   556,   558,   558,   559,   560,
-     561,   562,   563,   563,   564,   564,   565,   565,   565,   565,
-     566,   567,   567,   568,   568
+     155,   158,   164,   164,   164,   165,   170,   175,   180,   215,
+     219,   223,   227,   231,   235,   242,   245,   270,   297,   330,
+     359,   364,   384,   385,   386,   387,   398,   411,   425,   438,
+     451,   466,   468,   471,   472,   473,   477,   496,   500,   504,
+     508,   512,   516,   530,   542,   557,   559,   559,   560,   561,
+     562,   563,   564,   564,   565,   565,   566,   566,   566,   566,
+     567,   568,   568,   569,   569
 };
 #endif
 
@@ -1717,7 +1717,7 @@ yyreduce:
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 179 "parser.y"
+#line 180 "parser.y"
     { 	
 							symbolTableEntry* entry = returnVal((yyvsp[(1) - (1)].stringValue));
 							if(entry != nullptr)
@@ -1758,7 +1758,7 @@ yyreduce:
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 214 "parser.y"
+#line 215 "parser.y"
     {
 							(yyval.lexemeValue).intValue = (yyvsp[(1) - (1)].lexemeValue).intValue;
 							(yyval.lexemeValue).type = INT_VAL;
@@ -1768,7 +1768,7 @@ yyreduce:
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 218 "parser.y"
+#line 219 "parser.y"
     {
 							(yyval.lexemeValue).floatValue = (yyvsp[(1) - (1)].lexemeValue).floatValue;
 							(yyval.lexemeValue).type = FLOAT_VAL;
@@ -1778,7 +1778,7 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 222 "parser.y"
+#line 223 "parser.y"
     {
 							(yyval.lexemeValue).charValue = (yyvsp[(1) - (1)].lexemeValue).charValue;
 							(yyval.lexemeValue).type = CHAR_VAL;
@@ -1788,7 +1788,7 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 226 "parser.y"
+#line 227 "parser.y"
     {
 							(yyval.lexemeValue).stringValue = (yyvsp[(1) - (1)].lexemeValue).stringValue;
 							(yyval.lexemeValue).type = STRING_VAL;
@@ -1798,7 +1798,7 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 230 "parser.y"
+#line 231 "parser.y"
     {
 							(yyval.lexemeValue).boolValue = (yyvsp[(1) - (1)].lexemeValue).boolValue;
 							(yyval.lexemeValue).type = BOOL_VAL;
@@ -1808,7 +1808,7 @@ yyreduce:
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 234 "parser.y"
+#line 235 "parser.y"
     {
 							(yyval.lexemeValue).boolValue=(yyvsp[(1) - (1)].lexemeValue).boolValue;
 							(yyval.lexemeValue).type = BOOL_VAL;
@@ -1818,7 +1818,7 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 244 "parser.y"
+#line 245 "parser.y"
     {
 										printf("PLUS EXPRESSION\n");
 										printf("TYPES: %d %d\n", (yyvsp[(1) - (3)].lexemeValue).type, (yyvsp[(3) - (3)].lexemeValue).type);
@@ -1849,7 +1849,7 @@ yyreduce:
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 269 "parser.y"
+#line 270 "parser.y"
     {
 										printf("MINUS EXPRESSION\n");
 										printf("TYPES: %d %d\n", (yyvsp[(1) - (3)].lexemeValue).type, (yyvsp[(3) - (3)].lexemeValue).type);
@@ -1880,7 +1880,7 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 297 "parser.y"
+#line 298 "parser.y"
     {
 									
 									printf("MULTIPLY EXPRESSION\n");
@@ -1916,7 +1916,7 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 330 "parser.y"
+#line 331 "parser.y"
     {
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
 									{
@@ -1948,7 +1948,7 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 358 "parser.y"
+#line 359 "parser.y"
     { 
 				//printf("AT VALUE: Type = %d intValue = %d\n",$1.type, $1.intValue);
 				(yyval.lexemeValue).type= (yyvsp[(1) - (1)].lexemeValue).type;  (yyval.lexemeValue).intValue = (yyvsp[(1) - (1)].lexemeValue).intValue;		
@@ -1958,7 +1958,7 @@ yyreduce:
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 364 "parser.y"
+#line 365 "parser.y"
     {
 									// struct value TValue;
 									// if ($1.type == INT_VAL && $3.type == INT_VAL)
@@ -1982,7 +1982,7 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 386 "parser.y"
+#line 387 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -1999,7 +1999,7 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 398 "parser.y"
+#line 399 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -2016,7 +2016,7 @@ yyreduce:
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 411 "parser.y"
+#line 412 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -2033,7 +2033,7 @@ yyreduce:
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 425 "parser.y"
+#line 426 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -2050,7 +2050,7 @@ yyreduce:
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 438 "parser.y"
+#line 439 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -2067,7 +2067,7 @@ yyreduce:
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 451 "parser.y"
+#line 452 "parser.y"
     {
 									(yyval.lexemeValue).type = BOOL_VAL;
 									if ((yyvsp[(1) - (3)].lexemeValue).type == INT_VAL && (yyvsp[(3) - (3)].lexemeValue).type == INT_VAL)
@@ -2084,7 +2084,7 @@ yyreduce:
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 476 "parser.y"
+#line 477 "parser.y"
     {		
 													struct value Value;
 													Value.type = (yyvsp[(1) - (3)].intValue);
@@ -2109,7 +2109,7 @@ yyreduce:
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 496 "parser.y"
+#line 497 "parser.y"
     {
 						(yyval.intValue) = INT_VAL;
 					;}
@@ -2118,7 +2118,7 @@ yyreduce:
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 500 "parser.y"
+#line 501 "parser.y"
     {
 						(yyval.intValue) = FLOAT_VAL;
 					;}
@@ -2127,7 +2127,7 @@ yyreduce:
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 504 "parser.y"
+#line 505 "parser.y"
     {
 						(yyval.intValue)=CHAR_VAL;
 					;}
@@ -2136,7 +2136,7 @@ yyreduce:
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 508 "parser.y"
+#line 509 "parser.y"
     {
 						(yyval.intValue)= STRING_VAL;
 					;}
@@ -2145,7 +2145,7 @@ yyreduce:
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 512 "parser.y"
+#line 513 "parser.y"
     { 
 						(yyval.intValue)= BOOL_VAL;
 					;}
@@ -2154,7 +2154,7 @@ yyreduce:
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 515 "parser.y"
+#line 516 "parser.y"
     {
 																struct value Value;
 																Value.type = (yyvsp[(4) - (5)].lexemeValue).type;
@@ -2174,7 +2174,7 @@ yyreduce:
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 529 "parser.y"
+#line 530 "parser.y"
     {
 																	struct value Value;
 																	Value.type = (yyvsp[(3) - (4)].lexemeValue).type;
@@ -2192,7 +2192,7 @@ yyreduce:
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 542 "parser.y"
+#line 543 "parser.y"
     {
 																struct value Value;
 																Value.type = (yyvsp[(5) - (6)].lexemeValue).type;
@@ -2423,7 +2423,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 570 "parser.y"
+#line 571 "parser.y"
 
 
 void test(int x)

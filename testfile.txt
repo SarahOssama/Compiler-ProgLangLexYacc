@@ -1,5 +1,9 @@
+void main()
+{
   do
   {
     x++;
   } while (x < 20);
+
+}
 <<EOF>>
