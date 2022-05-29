@@ -177,7 +177,7 @@ do_while_statement:
 // 	SEMICOLON CLOSEDBRACKET 
 // 	OPENCURL statement CLOSEDCURL ;
 
-for_statement: 
+for_statement: FOR;
 
 
  // Values
@@ -367,22 +367,22 @@ expression:
 
 	expression PLUS_EQ expression 
 								{
-									struct value TValue;
-									if ($1.type == INT_VAL && $3.type == INT_VAL)
-									{
-										printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,	$1.intValue + $3.intValue);
-										TValue.intValue = $1.intValue + $3.intValue;
-										TValue.type = INT_VAL;
-										TValue.varName = $3.varName;
-									}
-									if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
-									{
-										TValue.floatValue = $1.floatValue + $3.floatValue;
-										TValue.type = FLOAT_VAL;
-										TValue.varName = $3.varName;
+									// struct value TValue;
+									// if ($1.type == INT_VAL && $3.type == INT_VAL)
+									// {
+									// 	printf("1: $d, 3: %d, $$ = %d\n", $1.intValue, $3.intValue,	$1.intValue + $3.intValue);
+									// 	TValue.intValue = $1.intValue + $3.intValue;
+									// 	TValue.type = INT_VAL;
+									// 	TValue.varName = $1.varName;
+									// }
+									// if ($1.type == FLOAT_VAL && $3.type == FLOAT_VAL)
+									// {
+									// 	TValue.floatValue = $1.floatValue + $3.floatValue;
+									// 	TValue.type = FLOAT_VAL;
+									// 	TValue.varName = $1.varName;
 
-									}
-									updateEntry(TValue, yylineno);
+									// }
+									// updateEntry(TValue, yylineno);
 								}
 	|
 	expression MINUS_EQ expression |
