@@ -1,2 +1,0 @@
-Error: Variable x is not declared
-Error: Variable x is not declared

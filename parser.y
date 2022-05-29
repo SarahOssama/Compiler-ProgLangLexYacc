@@ -35,6 +35,7 @@
 //Logical Expressions
 %token AND OR NOT
 
+%token SWITCH CASE BREAK DEFAULT
 
 //Declarations
 %token INT FLOAT STRING CHAR BOOL
@@ -128,8 +129,7 @@ statement :
 	| function_call						{printf("Function Call \n");}
 	| OPENCURL {openBracket();} statements CLOSEDCURL {closeBracket();}
 	| RETURN return_value SEMICOLON
-	// | MIF
-	// | UIF
+	| switch_case
 	;
 
 
@@ -169,6 +169,17 @@ while_statement:
 do_while_statement:
 		DO OPENCURL statements CLOSEDCURL WHILE OPENBRACKET expression 
 		CLOSEDBRACKET SEMICOLON;
+
+switch_case: SWITCH OPENBRACKET IDENTIFIER CLOSEDBRACKET
+			OPENCURL switch_body CLOSEDCURL;
+			
+switch_body: switch_body CASE value COLON statements BREAK SEMICOLON 
+			| switch_body CASE value COLON BREAK SEMICOLON 
+			| CASE value COLON statements BREAK SEMICOLON
+			| CASE value COLON BREAK SEMICOLON
+			| switch_body DEFAULT COLON statements BREAK SEMICOLON
+			| switch_body DEFAULT COLON BREAK SEMICOLON;
+
 
 //for statment
 for_statement:

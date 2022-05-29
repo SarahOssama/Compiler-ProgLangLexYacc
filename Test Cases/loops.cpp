@@ -17,13 +17,14 @@ void main()
 
   do
   {
-    x++
+    x++;
   } while (x < 20);
 
   switch (x)
   {
   case 1:
-    x = 10 break;
+    x = 10;
+    break;
 
   default:
     break;

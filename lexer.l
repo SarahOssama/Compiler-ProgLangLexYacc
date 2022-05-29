@@ -56,7 +56,10 @@ enum type {
 
     /* if then else statment */
 "if"                            return IF;
-"then"                          return THEN;
+"switch"                        return SWITCH;
+"case"                          return CASE;
+"break"                         return BREAK;
+"default"                       return DEFAULT;
 "else"                          return ELSE;
 
     /* Brackets */
