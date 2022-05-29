@@ -1,4 +1,0 @@
-Error: Variable x is not declared
-Error: Variable y is not declared
-Error: Variable a is not declared
-Error: Variable a is not declared
