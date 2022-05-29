@@ -120,7 +120,7 @@ statement :
 										}
 	| var_declaration 					{printf("Variable Declaration \n");}
 	| constant_declaration				{printf("Constant Declaration \n");}
-	//| if_statement						{printf("If Statement \n");}
+	| if_statement						{printf("If Statement \n");}
 	| while_statement 
 	| do_while_statement
 	| for_statement
@@ -128,8 +128,8 @@ statement :
 	| function_call						{printf("Function Call \n");}
 	| OPENCURL {openBracket();} statements CLOSEDCURL {closeBracket();}
 	| RETURN return_value SEMICOLON
-	| MIF
-	| UIF
+	// | MIF
+	// | UIF
 	;
 
 
@@ -148,16 +148,16 @@ statement :
 
 //if statment
 if_statement: 
-		IF OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();}
-		statement CLOSEDCURL {closeBracket();}  {printf("If then statement\n");}
+		IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
+		statement CLOSEDCURL  {printf("If then statement\n");}
 		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
-		statement CLOSEDCURL ELSE OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}
+		statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL 
 		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
 		statement CLOSEDCURL ELSE IF OPENBRACKET expression CLOSEDBRACKET 
-		OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();}
+		OPENCURL  statement CLOSEDCURL 
 		| IF OPENBRACKET expression CLOSEDBRACKET OPENCURL
-		statement CLOSEDCURL ELSE IF OPENBRACKET expression CLOSEDBRACKET OPENCURL {openBracket();} 
-		statement CLOSEDCURL {closeBracket();} ELSE OPENCUR statement CLOSEDCURL
+		statement CLOSEDCURL ELSE IF OPENBRACKET expression CLOSEDBRACKET OPENCURL 
+		statement CLOSEDCURL ELSE OPENCURL statement CLOSEDCURL
 		
 //while statment
 while_statement:
@@ -171,9 +171,14 @@ do_while_statement:
 	;
 
 // for statment
-for_statement:
-	FOR OPENBRACKET assignment_statement expression SEMICOLON expression SEMICOLON CLOSEDBRACKET OPENCURL {openBracket();} statement CLOSEDCURL {closeBracket();} {printf("for loop\n");}
-	;
+// for_statement:
+// 	FOR OPENBRACKET assignment_statement 
+// 	expression SEMICOLON expression 
+// 	SEMICOLON CLOSEDBRACKET 
+// 	OPENCURL statement CLOSEDCURL ;
+
+for_statement: 
+
 
  // Values
 value: 	IDENTIFIER 		{ 	
